@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; script-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="referrer" content="no-referrer" />
+    <meta name="description" content="Creating Vexunori groups, size limits, admin rights, adding and removing members, and what members can see." />
+    <title>Groups · Vexunori</title>
+    <link rel="icon" href="/vexunori/favicon.svg" type="image/svg+xml" />
+    <script type="module" crossorigin src="/vexunori/assets/app-4_tHw1xm.js"></script>
+    <script type="module" crossorigin src="/vexunori/assets/site-CyJ87sLJ.js"></script>
+    <link rel="stylesheet" crossorigin href="/vexunori/assets/app-D4G53B2d.css">
+    <link rel="stylesheet" crossorigin href="/vexunori/assets/site-CIUq-uRg.css">
+  </head>
+  <body class="vx-site">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="wrap">
+        <a class="brand" href="/vexunori/" aria-label="Vexunori home"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="var(--accent)"/><g fill="var(--on-accent)"><circle cx="9.2" cy="9.6" r="1.9"/><circle cx="11.6" cy="14.6" r="1.9"/><circle cx="14" cy="19.6" r="1.9"/></g><path d="M16.4 24.2 L23.2 9.4" stroke="var(--on-accent)" stroke-width="3.6" stroke-linecap="round"/></svg><span>Vexunori</span></a>
+        <nav class="site-nav" id="site-nav" aria-label="Main">
+          <ul>
+            <li><a href="/vexunori/">Home</a></li>
+            <li><a href="/vexunori/features.html">Features</a></li>
+            <li><a href="/vexunori/download.html">Download</a></li>
+            <li><a href="/vexunori/docs/" aria-current="page">Docs</a></li>
+            <li><a href="/vexunori/security.html">Security</a></li>
+            <li><a href="/vexunori/source.html">Licence</a></li>
+          </ul>
+        </nav>
+        <div class="header-tools">
+          <a class="btn btn--primary" href="/vexunori/app/">Open Web App</a>
+          <button type="button" class="icon-btn" data-theme-toggle hidden aria-label="Switch theme"><svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg><svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+          <button type="button" class="icon-btn nav-toggle" data-nav-toggle hidden aria-expanded="false" aria-controls="site-nav" aria-label="Menu"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+        </div>
+      </div>
+    </header>
+    <main id="main" tabindex="-1">
+<div class="wrap doc-layout">
+        <nav class="doc-side" aria-label="Documentation">
+          <p class="doc-side__title">Guides</p>
+          <ul>
+              <li><a href="/vexunori/docs/">Overview</a></li>
+              <li><a href="/vexunori/docs/getting-started.html">Getting started</a></li>
+              <li><a href="/vexunori/docs/identity.html">Your identity</a></li>
+              <li><a href="/vexunori/docs/messaging.html">Messaging</a></li>
+              <li><a href="/vexunori/docs/contacts-verification.html">Contacts & verification</a></li>
+              <li><a href="/vexunori/docs/groups.html" aria-current="page">Groups</a></li>
+              <li><a href="/vexunori/docs/files-and-sendguard.html">Files & SendGuard</a></li>
+              <li><a href="/vexunori/docs/morse.html">Morse</a></li>
+              <li><a href="/vexunori/docs/vault-and-spaces.html">Vault & Spaces</a></li>
+              <li><a href="/vexunori/docs/bridge-and-passports.html">Bridge & Passports</a></li>
+              <li><a href="/vexunori/docs/workspaces.html">Group workspaces</a></li>
+              <li><a href="/vexunori/docs/nearby-offline.html">Nearby & offline</a></li>
+              <li><a href="/vexunori/docs/tor.html">Tor</a></li>
+              <li><a href="/vexunori/docs/backup-recovery.html">Backup & recovery</a></li>
+              <li><a href="/vexunori/docs/notifications-calls.html">Notifications & calls</a></li>
+              <li><a href="/vexunori/docs/self-hosting.html">Self-hosting</a></li>
+              <li><a href="/vexunori/docs/troubleshooting.html">Troubleshooting</a></li>
+              <li><a href="/vexunori/docs/privacy.html">Privacy & data handling</a></li>
+          </ul>
+        </nav>
+        <article class="prose">
+          <h1>Groups</h1>
+          <p>Groups are private: each group message is end-to-end encrypted separately for every member and carries the group's id, so there is no group server and no group key stored on a relay.</p>
+
+          <h2 id="create">Creating a group</h2>
+          <p>Choose <strong>Groups → New group</strong>, give it a name and pick members from your contacts. You become the first admin. Every member's app receives the member list and each member's inbox relays so they can reach each other.</p>
+
+          <h2 id="limits">Size limits</h2>
+          <ul>
+            <li>Up to <strong>100 members</strong>. We recommend <strong>50 or fewer</strong>.</li>
+            <li>Because every message is encrypted and uploaded once per member, a message to 50 people means 50 uploads. Large groups are slower, use more data and battery, and hit relay rate limits sooner — especially with attachments.</li>
+          </ul>
+
+          <h2 id="admins">Admins</h2>
+          <ul>
+            <li>Admins can rename the group, add members and remove members. Other members cannot.</li>
+            <li>Every change is numbered; apps ignore changes from non-admins and older changes, so a removed admin cannot undo things later.</li>
+            <li>Anyone can leave. If the last admin leaves, every app promotes the same next member to admin.</li>
+            <li>Admin rights are enforced by each member's app. A member running a modified app can ignore them on their own device, but cannot force other apps to accept their changes.</li>
+          </ul>
+
+          <h2 id="see">What members can see</h2>
+          <ul>
+            <li>All members see the member list (public keys and names) and every message sent while they are a member.</li>
+            <li>New members do not receive earlier chat messages. They do receive the group's <a href="/vexunori/docs/workspaces.html">shared workspace</a> (tasks, notes, polls…).</li>
+            <li><strong>Removed members</strong> stop receiving new messages because senders stop encrypting for them. They keep everything they already received.</li>
+            <li>Relays see one envelope per member, addressed to that member, so a relay serving many members can guess the group's size and activity.</li>
+          </ul>
+          <nav class="cta-row" aria-label="Guide navigation">
+            <a class="btn" href="/vexunori/docs/contacts-verification.html">← Contacts & verification</a>
+            <a class="btn" href="/vexunori/docs/files-and-sendguard.html">Files & SendGuard →</a>
+          </nav>
+        </article>
+      </div>
+    </main>
+    <footer class="site-footer">
+      <div class="wrap">
+        <div>
+          <p><strong>Vexunori</strong> — Private by design. Connected by choice.</p>
+          <p>Free to use, not open source: see the <a href="/vexunori/source.html#licence">licence</a> and the <a href="/vexunori/source.html#open-source-components">open-source components</a> it uses.</p>
+          <p>No trackers, no analytics, no cookies.</p>
+        </div>
+        <nav aria-label="Footer">
+          <ul>
+            <li><a href="/vexunori/app/">Web app</a></li>
+            <li><a href="/vexunori/download.html">Download</a></li>
+            <li><a href="/vexunori/docs/">Docs</a></li>
+            <li><a href="/vexunori/docs/privacy.html">Privacy</a></li>
+            <li><a href="/vexunori/security.html">Security</a></li>
+            <li><a href="/vexunori/security.html#report">Report a vulnerability</a></li>
+            <li><a href="/vexunori/source.html">Licence</a></li>
+          </ul>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

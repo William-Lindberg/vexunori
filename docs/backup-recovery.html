@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; script-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="referrer" content="no-referrer" />
+    <meta name="description" content="Encrypted backups, linking a second device, the recovery circle, and what happens if you lose your passphrase or device." />
+    <title>Backup & recovery · Vexunori</title>
+    <link rel="icon" href="/vexunori/favicon.svg" type="image/svg+xml" />
+    <script type="module" crossorigin src="/vexunori/assets/app-4_tHw1xm.js"></script>
+    <script type="module" crossorigin src="/vexunori/assets/site-CyJ87sLJ.js"></script>
+    <link rel="stylesheet" crossorigin href="/vexunori/assets/app-D4G53B2d.css">
+    <link rel="stylesheet" crossorigin href="/vexunori/assets/site-CIUq-uRg.css">
+  </head>
+  <body class="vx-site">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="wrap">
+        <a class="brand" href="/vexunori/" aria-label="Vexunori home"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="var(--accent)"/><g fill="var(--on-accent)"><circle cx="9.2" cy="9.6" r="1.9"/><circle cx="11.6" cy="14.6" r="1.9"/><circle cx="14" cy="19.6" r="1.9"/></g><path d="M16.4 24.2 L23.2 9.4" stroke="var(--on-accent)" stroke-width="3.6" stroke-linecap="round"/></svg><span>Vexunori</span></a>
+        <nav class="site-nav" id="site-nav" aria-label="Main">
+          <ul>
+            <li><a href="/vexunori/">Home</a></li>
+            <li><a href="/vexunori/features.html">Features</a></li>
+            <li><a href="/vexunori/download.html">Download</a></li>
+            <li><a href="/vexunori/docs/" aria-current="page">Docs</a></li>
+            <li><a href="/vexunori/security.html">Security</a></li>
+            <li><a href="/vexunori/source.html">Licence</a></li>
+          </ul>
+        </nav>
+        <div class="header-tools">
+          <a class="btn btn--primary" href="/vexunori/app/">Open Web App</a>
+          <button type="button" class="icon-btn" data-theme-toggle hidden aria-label="Switch theme"><svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg><svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+          <button type="button" class="icon-btn nav-toggle" data-nav-toggle hidden aria-expanded="false" aria-controls="site-nav" aria-label="Menu"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+        </div>
+      </div>
+    </header>
+    <main id="main" tabindex="-1">
+<div class="wrap doc-layout">
+        <nav class="doc-side" aria-label="Documentation">
+          <p class="doc-side__title">Guides</p>
+          <ul>
+              <li><a href="/vexunori/docs/">Overview</a></li>
+              <li><a href="/vexunori/docs/getting-started.html">Getting started</a></li>
+              <li><a href="/vexunori/docs/identity.html">Your identity</a></li>
+              <li><a href="/vexunori/docs/messaging.html">Messaging</a></li>
+              <li><a href="/vexunori/docs/contacts-verification.html">Contacts & verification</a></li>
+              <li><a href="/vexunori/docs/groups.html">Groups</a></li>
+              <li><a href="/vexunori/docs/files-and-sendguard.html">Files & SendGuard</a></li>
+              <li><a href="/vexunori/docs/morse.html">Morse</a></li>
+              <li><a href="/vexunori/docs/vault-and-spaces.html">Vault & Spaces</a></li>
+              <li><a href="/vexunori/docs/bridge-and-passports.html">Bridge & Passports</a></li>
+              <li><a href="/vexunori/docs/workspaces.html">Group workspaces</a></li>
+              <li><a href="/vexunori/docs/nearby-offline.html">Nearby & offline</a></li>
+              <li><a href="/vexunori/docs/tor.html">Tor</a></li>
+              <li><a href="/vexunori/docs/backup-recovery.html" aria-current="page">Backup & recovery</a></li>
+              <li><a href="/vexunori/docs/notifications-calls.html">Notifications & calls</a></li>
+              <li><a href="/vexunori/docs/self-hosting.html">Self-hosting</a></li>
+              <li><a href="/vexunori/docs/troubleshooting.html">Troubleshooting</a></li>
+              <li><a href="/vexunori/docs/privacy.html">Privacy & data handling</a></li>
+          </ul>
+        </nav>
+        <article class="prose">
+          <h1>Backup &amp; recovery</h1>
+          <div class="banner banner--warn"><p>There is no Vexunori server that holds a copy of your identity. <strong>Nobody can reset your passphrase or recover your key for you.</strong> If you lose your device, your passphrase and every backup, your identity and local data are gone.</p></div>
+
+          <h2 id="backup">Encrypted backups</h2>
+          <p><strong>Settings → Backup &amp; recovery</strong> writes a <code>.vxbackup</code> file with <em>everything</em>: your secret key, contacts, messages, Vault and settings.</p>
+          <ul>
+            <li>It is encrypted with AES-256-GCM under a <strong>backup passphrase</strong> you choose (separate from your app passphrase). Use a strong one and store it apart from the file.</li>
+            <li>Anyone with the file and the backup passphrase gets your whole identity.</li>
+            <li>Use <strong>Verify a backup</strong> to check that a saved file opens with your backup passphrase.</li>
+            <li>Restore on the welcome screen of a fresh install: <strong>Restore from backup</strong>. Restoring never merges into an existing profile.</li>
+            <li>The backup is built in your device's memory. A very large Vault (many big files) may be too large to back up on a phone; files over 512 MB are refused.</li>
+            <li>A backup is a snapshot. Messages after the backup are on your relays only as long as the relays keep them.</li>
+          </ul>
+
+          <h2 id="link">Linking another device</h2>
+          <p>On the device you already use, open <strong>Settings → Security → Link another device</strong>. It shows a QR code and a one-time code. On the new device choose <strong>Link this device / import a key</strong> on the welcome screen, scan the QR and type the code. The QR contains your secret key encrypted with the one-time code, so a photo of the QR alone is not enough.</p>
+          <p>Both devices then share one identity. Each sent message is also sent to yourself, so both see the conversation going forward, plus whatever older messages your relays still keep. Contacts and settings are not synced automatically; use a backup to copy everything.</p>
+
+          <h2 id="circle">Recovery kit (recovery circle)</h2>
+          <p>In <strong>Settings → Backup &amp; recovery → Recovery kit</strong> you can split your secret key into <em>n</em> shares for people you trust, so that any <em>k</em> of them together can restore it (Shamir's Secret Sharing).</p>
+          <ul>
+            <li>Fewer than <em>k</em> shares reveal nothing about your key.</li>
+            <li><strong>Any <em>k</em> holders together can take over your identity.</strong> Choose people who will not collude and keep shares safe.</li>
+            <li>Shares contain only the key — not messages or contacts.</li>
+            <li>Shares cannot be revoked. If too many are lost (more than <em>n − k</em>), recovery is impossible.</li>
+          </ul>
+          <p>To recover, choose <strong>Recover with a recovery kit</strong> on the welcome screen of a fresh install and enter <em>k</em> shares.</p>
+
+          <h2 id="lost">If you lose…</h2>
+          <dl>
+            <dt>…your passphrase</dt><dd>Your local data cannot be decrypted. Restore from a backup, a recovery kit or another linked device on a fresh install, or start over.</dd>
+            <dt>…your device</dt><dd>Restore a backup or link from another device. If the lost device had no passphrase (web device mode), whoever finds it can read your data; consider creating a new identity.</dd>
+            <dt>…a backup passphrase</dt><dd>That backup is useless. Make a new backup.</dd>
+            <dt>…a Space passphrase</dt><dd>Items in that protected Space cannot be recovered.</dd>
+          </dl>
+          <nav class="cta-row" aria-label="Guide navigation">
+            <a class="btn" href="/vexunori/docs/tor.html">← Tor</a>
+            <a class="btn" href="/vexunori/docs/notifications-calls.html">Notifications & calls →</a>
+          </nav>
+        </article>
+      </div>
+    </main>
+    <footer class="site-footer">
+      <div class="wrap">
+        <div>
+          <p><strong>Vexunori</strong> — Private by design. Connected by choice.</p>
+          <p>Free to use, not open source: see the <a href="/vexunori/source.html#licence">licence</a> and the <a href="/vexunori/source.html#open-source-components">open-source components</a> it uses.</p>
+          <p>No trackers, no analytics, no cookies.</p>
+        </div>
+        <nav aria-label="Footer">
+          <ul>
+            <li><a href="/vexunori/app/">Web app</a></li>
+            <li><a href="/vexunori/download.html">Download</a></li>
+            <li><a href="/vexunori/docs/">Docs</a></li>
+            <li><a href="/vexunori/docs/privacy.html">Privacy</a></li>
+            <li><a href="/vexunori/security.html">Security</a></li>
+            <li><a href="/vexunori/security.html#report">Report a vulnerability</a></li>
+            <li><a href="/vexunori/source.html">Licence</a></li>
+          </ul>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

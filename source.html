@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; script-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="referrer" content="no-referrer" />
+    <meta name="description" content="Vexunori is free to use but not open source. A plain summary of its licence, what that means for security review, and the open-source libraries it includes with their licences." />
+    <title>Licence &amp; open-source components · Vexunori</title>
+    <link rel="icon" href="/vexunori/favicon.svg" type="image/svg+xml" />
+    <script type="module" crossorigin src="/vexunori/assets/app-4_tHw1xm.js"></script>
+    <script type="module" crossorigin src="/vexunori/assets/site-CyJ87sLJ.js"></script>
+    <link rel="stylesheet" crossorigin href="/vexunori/assets/app-D4G53B2d.css">
+    <link rel="stylesheet" crossorigin href="/vexunori/assets/site-CIUq-uRg.css">
+  </head>
+  <body class="vx-site">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="wrap">
+        <a class="brand" href="/vexunori/" aria-label="Vexunori home"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="var(--accent)"/><g fill="var(--on-accent)"><circle cx="9.2" cy="9.6" r="1.9"/><circle cx="11.6" cy="14.6" r="1.9"/><circle cx="14" cy="19.6" r="1.9"/></g><path d="M16.4 24.2 L23.2 9.4" stroke="var(--on-accent)" stroke-width="3.6" stroke-linecap="round"/></svg><span>Vexunori</span></a>
+        <nav class="site-nav" id="site-nav" aria-label="Main">
+          <ul>
+            <li><a href="/vexunori/">Home</a></li>
+            <li><a href="/vexunori/features.html">Features</a></li>
+            <li><a href="/vexunori/download.html">Download</a></li>
+            <li><a href="/vexunori/docs/">Docs</a></li>
+            <li><a href="/vexunori/security.html">Security</a></li>
+            <li><a href="/vexunori/source.html" aria-current="page">Licence</a></li>
+          </ul>
+        </nav>
+        <div class="header-tools">
+          <a class="btn btn--primary" href="/vexunori/app/">Open Web App</a>
+          <button type="button" class="icon-btn" data-theme-toggle hidden aria-label="Switch theme"><svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg><svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+          <button type="button" class="icon-btn nav-toggle" data-nav-toggle hidden aria-expanded="false" aria-controls="site-nav" aria-label="Menu"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+        </div>
+      </div>
+    </header>
+    <main id="main" tabindex="-1">
+      <div class="wrap">
+      <div class="wrap">
+        <div class="page-head">
+          <h1>Licence &amp; open-source components</h1>
+          <p>Vexunori is free to use, but it is not open source. It is built with open-source libraries, listed below with their licences.</p>
+        </div>
+        <div class="prose">
+          <h2 id="licence">The Vexunori licence</h2>
+          <p>Vexunori — the website, the web app and the Android app — is © 2026 William Matthew Lindberg. All rights reserved. Its source code is not published. The full terms are in the <a href="/vexunori/LICENSE.txt">licence text</a>; this is a plain summary, and the licence text is what counts.</p>
+          <h3 id="licence-may">You may, free of charge</h3>
+          <ul>
+            <li>use the website and the web app, and download the Android app from the official Vexunori download page and install it on your own devices, for your own personal, non-commercial use;</li>
+            <li>use it within a non-commercial group such as a family, a club or a community, as long as nobody is charged for access to Vexunori itself;</li>
+            <li>make backups of your own Vexunori data, and share the messages, notes and files you made yourself;</li>
+            <li>run the Vexunori relay software, but only if you received it from the copyright holder for that purpose.</li>
+          </ul>
+          <h3 id="licence-may-not">You may not, without written permission</h3>
+          <ul>
+            <li>copy, re-upload or redistribute the app, the APK or the website's files (apart from the copies made automatically when you install, run or visit it yourself);</li>
+            <li>modify, decompile or reverse engineer it, or publish anything based on it, including a renamed or rebranded version — except where the law where you live allows this anyway, for example for security research or interoperability;</li>
+            <li>use it commercially: selling it, charging for access, including it in a paid product or service, or showing ads in or around it;</li>
+            <li>remove or change the licence or copyright notices, or use the name or logo "Vexunori" for another product.</li>
+          </ul>
+          <p>The website's files and the APK are hosted in a public repository. Being able to view or fork that repository on its hosting platform gives no rights beyond the licence. If you break the licence, your permission to use Vexunori ends automatically.</p>
+          <p>Vexunori comes <strong>without any warranty</strong>. It is a communication tool and cannot guarantee privacy, anonymity or delivery of messages; see <a href="/vexunori/security.html">Security &amp; privacy</a> for its limits.</p>
+
+          <h2 id="security-review">What this means for security review</h2>
+          <ul>
+            <li><strong>No external audit.</strong> Vexunori has not had an independent security audit.</li>
+            <li><strong>The source code is not public</strong>, so independent review of Vexunori's own code is not currently possible. You cannot check for yourself that the app does what these pages describe; you have to trust the maintainer's description, which we try to keep exact, including the <a href="/vexunori/features.html">feature status</a> and the <a href="/vexunori/security.html#limits">known limits</a>.</li>
+            <li><strong>No custom cryptography.</strong> Encryption, signatures and key handling come from the widely used open-source libraries listed below (<code>nostr-tools</code>, <code>@noble/*</code>) and from the browser's built-in WebCrypto. Those libraries can be reviewed on their own; how Vexunori uses them cannot be independently checked today.</li>
+            <li><strong>What you can check:</strong> that the APK you downloaded matches the published SHA-256 checksum and signing certificate (see <a href="/vexunori/download.html#verify">Download</a>). That proves the file was not changed on the way to you. It says nothing about what the code does.</li>
+          </ul>
+
+          <h2 id="open-source-components">Open-source licences</h2>
+          <p>Vexunori includes the third-party open-source libraries below. Each is covered by its own licence, which applies only to that library and gives no rights to Vexunori itself. The list is the production dependency tree of the web app and Android app (development tools used only to build and test are not shipped and not listed). The Android app additionally contains AndroidX and Capacitor native libraries pulled in by Gradle (Apache-2.0 / MIT).</p>
+          <p>No analytics, advertising, crash-reporting or AI libraries are included.</p>
+          <h3 id="main-components">Main components</h3>
+          <div class="table-wrap"><table>
+            <thead><tr><th scope="col">Package</th><th scope="col">Used for</th><th scope="col">Licence</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">nostr-tools (+ @noble/curves, @noble/hashes, @noble/ciphers, @scure)</th><td>Keys, signatures, NIP-44 encryption, gift wraps, relay connections</td><td>Unlicense / MIT</td></tr>
+              <tr><th scope="row">react, react-dom</th><td>User interface</td><td>MIT</td></tr>
+              <tr><th scope="row">idb</th><td>IndexedDB wrapper</td><td>ISC</td></tr>
+              <tr><th scope="row">shamir-secret-sharing</th><td>Recovery kit shares</td><td>Apache-2.0</td></tr>
+              <tr><th scope="row">qrcode, jsqr</th><td>Making and reading QR codes</td><td>MIT / Apache-2.0</td></tr>
+              <tr><th scope="row">fflate</th><td>Compression for parcels and backups</td><td>MIT</td></tr>
+              <tr><th scope="row">@capacitor/*</th><td>Android app shell and plugins</td><td>MIT</td></tr>
+            </tbody>
+          </table></div>
+          <h3 id="all-components">All packages</h3>
+          <!-- licences:start (generated by node scripts/licenses.mjs; do not edit by hand) -->
+          <p>54 packages: MIT 41, ISC 9, Apache-2.0 2, Unlicense 1, 0BSD 1. The full licence text of each package is published by its project (see the Project column).</p>
+          <div class="table-wrap"><table>
+            <thead><tr><th scope="col">Package</th><th scope="col">Version</th><th scope="col">Licence</th><th scope="col">Project</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">@capacitor/android</th><td>8.6.0</td><td>MIT</td><td class="small">https://github.com/ionic-team/capacitor</td></tr>
+              <tr><th scope="row">@capacitor/app</th><td>8.1.2</td><td>MIT</td><td class="small">https://github.com/ionic-team/capacitor-plugins</td></tr>
+              <tr><th scope="row">@capacitor/browser</th><td>8.0.5</td><td>MIT</td><td class="small">https://github.com/ionic-team/capacitor-plugins</td></tr>
+              <tr><th scope="row">@capacitor/core</th><td>8.6.0</td><td>MIT</td><td class="small">https://github.com/ionic-team/capacitor</td></tr>
+              <tr><th scope="row">@capacitor/filesystem</th><td>8.1.5</td><td>MIT</td><td class="small">https://github.com/ionic-team/capacitor-filesystem</td></tr>
+              <tr><th scope="row">@capacitor/haptics</th><td>8.0.2</td><td>MIT</td><td class="small">https://github.com/ionic-team/capacitor-haptics</td></tr>
+              <tr><th scope="row">@capacitor/local-notifications</th><td>8.3.1</td><td>MIT</td><td class="small">https://github.com/ionic-team/capacitor-local-notifications</td></tr>
+              <tr><th scope="row">@capacitor/share</th><td>8.0.3</td><td>MIT</td><td class="small">https://github.com/ionic-team/capacitor-plugins</td></tr>
+              <tr><th scope="row">@capacitor/synapse</th><td>1.0.4</td><td>ISC</td><td class="small"></td></tr>
+              <tr><th scope="row">@noble/ciphers</th><td>2.1.1</td><td>MIT</td><td class="small">https://github.com/paulmillr/noble-ciphers</td></tr>
+              <tr><th scope="row">@noble/curves</th><td>2.0.1</td><td>MIT</td><td class="small">https://github.com/paulmillr/noble-curves</td></tr>
+              <tr><th scope="row">@noble/hashes</th><td>2.0.1</td><td>MIT</td><td class="small">https://github.com/paulmillr/noble-hashes</td></tr>
+              <tr><th scope="row">@scure/base</th><td>2.0.0</td><td>MIT</td><td class="small">https://github.com/paulmillr/scure-base</td></tr>
+              <tr><th scope="row">@scure/bip32</th><td>2.0.1</td><td>MIT</td><td class="small">https://github.com/paulmillr/scure-bip32</td></tr>
+              <tr><th scope="row">@scure/bip39</th><td>2.0.1</td><td>MIT</td><td class="small">https://github.com/paulmillr/scure-bip39</td></tr>
+              <tr><th scope="row">ansi-regex</th><td>5.0.1</td><td>MIT</td><td class="small">https://github.com/chalk/ansi-regex</td></tr>
+              <tr><th scope="row">ansi-styles</th><td>4.3.0</td><td>MIT</td><td class="small">https://github.com/chalk/ansi-styles</td></tr>
+              <tr><th scope="row">camelcase</th><td>5.3.1</td><td>MIT</td><td class="small">https://github.com/sindresorhus/camelcase</td></tr>
+              <tr><th scope="row">cliui</th><td>6.0.0</td><td>ISC</td><td class="small">http://github.com/yargs/cliui</td></tr>
+              <tr><th scope="row">color-convert</th><td>2.0.1</td><td>MIT</td><td class="small">https://github.com/Qix-/color-convert</td></tr>
+              <tr><th scope="row">color-name</th><td>1.1.4</td><td>MIT</td><td class="small">https://github.com/colorjs/color-name</td></tr>
+              <tr><th scope="row">decamelize</th><td>1.2.0</td><td>MIT</td><td class="small">https://github.com/sindresorhus/decamelize</td></tr>
+              <tr><th scope="row">dijkstrajs</th><td>1.0.3</td><td>MIT</td><td class="small">https://github.com/tcort/dijkstrajs</td></tr>
+              <tr><th scope="row">emoji-regex</th><td>8.0.0</td><td>MIT</td><td class="small">https://github.com/mathiasbynens/emoji-regex</td></tr>
+              <tr><th scope="row">fflate</th><td>0.8.3</td><td>MIT</td><td class="small">https://github.com/101arrowz/fflate</td></tr>
+              <tr><th scope="row">find-up</th><td>4.1.0</td><td>MIT</td><td class="small">https://github.com/sindresorhus/find-up</td></tr>
+              <tr><th scope="row">get-caller-file</th><td>2.0.5</td><td>ISC</td><td class="small">https://github.com/stefanpenner/get-caller-file</td></tr>
+              <tr><th scope="row">idb</th><td>8.0.4</td><td>ISC</td><td class="small">https://github.com/jakearchibald/idb</td></tr>
+              <tr><th scope="row">is-fullwidth-code-point</th><td>3.0.0</td><td>MIT</td><td class="small">https://github.com/sindresorhus/is-fullwidth-code-point</td></tr>
+              <tr><th scope="row">jsqr</th><td>1.4.0</td><td>Apache-2.0</td><td class="small">https://github.com/cozmo/jsQR</td></tr>
+              <tr><th scope="row">locate-path</th><td>5.0.0</td><td>MIT</td><td class="small">https://github.com/sindresorhus/locate-path</td></tr>
+              <tr><th scope="row">nostr-tools</th><td>2.25.2</td><td>Unlicense</td><td class="small">https://github.com/nbd-wtf/nostr-tools</td></tr>
+              <tr><th scope="row">nostr-wasm</th><td>0.1.0</td><td>MIT</td><td class="small"></td></tr>
+              <tr><th scope="row">p-limit</th><td>2.3.0</td><td>MIT</td><td class="small">https://github.com/sindresorhus/p-limit</td></tr>
+              <tr><th scope="row">p-locate</th><td>4.1.0</td><td>MIT</td><td class="small">https://github.com/sindresorhus/p-locate</td></tr>
+              <tr><th scope="row">p-try</th><td>2.2.0</td><td>MIT</td><td class="small">https://github.com/sindresorhus/p-try</td></tr>
+              <tr><th scope="row">path-exists</th><td>4.0.0</td><td>MIT</td><td class="small">https://github.com/sindresorhus/path-exists</td></tr>
+              <tr><th scope="row">pngjs</th><td>5.0.0</td><td>MIT</td><td class="small">https://github.com/lukeapage/pngjs</td></tr>
+              <tr><th scope="row">qrcode</th><td>1.5.4</td><td>MIT</td><td class="small">https://github.com/soldair/node-qrcode</td></tr>
+              <tr><th scope="row">react</th><td>19.3.1</td><td>MIT</td><td class="small">https://github.com/react/react</td></tr>
+              <tr><th scope="row">react-dom</th><td>19.3.1</td><td>MIT</td><td class="small">https://github.com/react/react</td></tr>
+              <tr><th scope="row">require-directory</th><td>2.1.1</td><td>MIT</td><td class="small">https://github.com/troygoode/node-require-directory</td></tr>
+              <tr><th scope="row">require-main-filename</th><td>2.0.0</td><td>ISC</td><td class="small">https://github.com/yargs/require-main-filename</td></tr>
+              <tr><th scope="row">scheduler</th><td>0.28.0</td><td>MIT</td><td class="small">https://github.com/react/react</td></tr>
+              <tr><th scope="row">set-blocking</th><td>2.0.0</td><td>ISC</td><td class="small">https://github.com/yargs/set-blocking</td></tr>
+              <tr><th scope="row">shamir-secret-sharing</th><td>0.0.4</td><td>Apache-2.0</td><td class="small">https://github.com/privy-io/shamir-secret-sharing</td></tr>
+              <tr><th scope="row">string-width</th><td>4.2.3</td><td>MIT</td><td class="small">https://github.com/sindresorhus/string-width</td></tr>
+              <tr><th scope="row">strip-ansi</th><td>6.0.1</td><td>MIT</td><td class="small">https://github.com/chalk/strip-ansi</td></tr>
+              <tr><th scope="row">tslib</th><td>2.8.1</td><td>0BSD</td><td class="small">https://github.com/Microsoft/tslib</td></tr>
+              <tr><th scope="row">which-module</th><td>2.0.1</td><td>ISC</td><td class="small">https://github.com/nexdrew/which-module</td></tr>
+              <tr><th scope="row">wrap-ansi</th><td>6.2.0</td><td>MIT</td><td class="small">https://github.com/chalk/wrap-ansi</td></tr>
+              <tr><th scope="row">y18n</th><td>4.0.3</td><td>ISC</td><td class="small">https://github.com/yargs/y18n</td></tr>
+              <tr><th scope="row">yargs</th><td>15.4.1</td><td>MIT</td><td class="small">https://github.com/yargs/yargs</td></tr>
+              <tr><th scope="row">yargs-parser</th><td>18.1.3</td><td>ISC</td><td class="small">https://github.com/yargs/yargs-parser</td></tr>
+            </tbody>
+          </table></div>
+          <!-- licences:end -->
+        </div>
+      </div>
+    </main>
+    <footer class="site-footer">
+      <div class="wrap">
+        <div>
+          <p><strong>Vexunori</strong> — Private by design. Connected by choice.</p>
+          <p>Free to use, not open source: see the <a href="/vexunori/source.html#licence">licence</a> and the <a href="/vexunori/source.html#open-source-components">open-source components</a> it uses.</p>
+          <p>No trackers, no analytics, no cookies.</p>
+        </div>
+        <nav aria-label="Footer">
+          <ul>
+            <li><a href="/vexunori/app/">Web app</a></li>
+            <li><a href="/vexunori/download.html">Download</a></li>
+            <li><a href="/vexunori/docs/">Docs</a></li>
+            <li><a href="/vexunori/docs/privacy.html">Privacy</a></li>
+            <li><a href="/vexunori/security.html">Security</a></li>
+            <li><a href="/vexunori/security.html#report">Report a vulnerability</a></li>
+            <li><a href="/vexunori/source.html">Licence</a></li>
+          </ul>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,26 @@
+{
+  "version": "0.1.0",
+  "versionCode": 100,
+  "buildDate": "2026-10-29T13:15:06.000Z",
+  "file": "vexunori-0.1.0.apk",
+  "size": 3699937,
+  "sha256": "d1caac459024c66c02b100c26add083aad7c229f128305718e63667b16d7b95d",
+  "minAndroid": "7.0",
+  "signingCertSha256": "b96be6c7d263d56bd40b8479d02f94db6f848dae99f5ae6523b19b4b1087433b",
+  "notes": [
+    "First public version of the web app and the Android app (APK, not on Google Play). Vexunori is free to use but not open source.",
+    "The Android app is build-verified only: it has not yet been installed or run on a phone or emulator.",
+    "End-to-end encrypted 1:1 and group messages (NIP-17: NIP-44 v2 + gift wraps) over Nostr relays, with honest queued / sent-to-relays / delivered / read statuses.",
+    "Replies, reactions, edits, delete for everyone, disappearing messages, pins, bookmarks, drafts and local search.",
+    "Attachments up to 3 files of 1.5 MB each, verified by SHA-256 on arrival.",
+    "Identity on your device with passphrase or Android Keystore protection; encrypted backups, device linking and a recovery kit.",
+    "Contact verification with safety numbers; message requests and blocking.",
+    "Encrypted Vault, Spaces (protected Spaces with their own passphrase), Privacy Bridge and Passports.",
+    "Shared group workspaces: tasks, to-dos, polls, notes, events, links, files and bookmarks; personal reminders on your device.",
+    "Privacy Center: health check, local privacy receipts, SendGuard file and link review, Emergency Freeze.",
+    "Morse translator, keyer, audio/light/vibration playback; experimental microphone decoding.",
+    "Offline hand-over with QR parcels and parcel files; experimental LAN relay support.",
+    "Experimental: Tor via Orbot on Android; 1:1 WebRTC calls (off by default, reveal your IP address, no TURN relay, disabled in strict Tor mode).",
+    "Known limitations: no forward secrecy; relays see metadata; contacts added by npub only may not receive messages (no NIP-17 inbox-relay lookup); no typing indicators; no Bluetooth or Wi-Fi Direct mesh; notifications only while the app runs; no external audit."
+  ]
+}

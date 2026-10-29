@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; script-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="referrer" content="no-referrer" />
+    <meta name="description" content="Vexunori threat model: what is protected and what is not, end-to-end vs transport encryption vs anonymity, who sees which metadata, and how to report a vulnerability." />
+    <title>Security & privacy · Vexunori</title>
+    <link rel="icon" href="/vexunori/favicon.svg" type="image/svg+xml" />
+    <script type="module" crossorigin src="/vexunori/assets/app-4_tHw1xm.js"></script>
+    <script type="module" crossorigin src="/vexunori/assets/site-CyJ87sLJ.js"></script>
+    <link rel="stylesheet" crossorigin href="/vexunori/assets/app-D4G53B2d.css">
+    <link rel="stylesheet" crossorigin href="/vexunori/assets/site-CIUq-uRg.css">
+  </head>
+  <body class="vx-site">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="wrap">
+        <a class="brand" href="/vexunori/" aria-label="Vexunori home"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="var(--accent)"/><g fill="var(--on-accent)"><circle cx="9.2" cy="9.6" r="1.9"/><circle cx="11.6" cy="14.6" r="1.9"/><circle cx="14" cy="19.6" r="1.9"/></g><path d="M16.4 24.2 L23.2 9.4" stroke="var(--on-accent)" stroke-width="3.6" stroke-linecap="round"/></svg><span>Vexunori</span></a>
+        <nav class="site-nav" id="site-nav" aria-label="Main">
+          <ul>
+            <li><a href="/vexunori/">Home</a></li>
+            <li><a href="/vexunori/features.html">Features</a></li>
+            <li><a href="/vexunori/download.html">Download</a></li>
+            <li><a href="/vexunori/docs/">Docs</a></li>
+            <li><a href="/vexunori/security.html" aria-current="page">Security</a></li>
+            <li><a href="/vexunori/source.html">Licence</a></li>
+          </ul>
+        </nav>
+        <div class="header-tools">
+          <a class="btn btn--primary" href="/vexunori/app/">Open Web App</a>
+          <button type="button" class="icon-btn" data-theme-toggle hidden aria-label="Switch theme"><svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg><svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+          <button type="button" class="icon-btn nav-toggle" data-nav-toggle hidden aria-expanded="false" aria-controls="site-nav" aria-label="Menu"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+        </div>
+      </div>
+    </header>
+    <main id="main" tabindex="-1">
+      <div class="wrap">
+        <div class="page-head">
+          <h1>Security &amp; privacy</h1>
+          <p>A summary of Vexunori's threat model: what we try to protect, from whom, and where the protection stops. The source code and its technical documents are not public; this page is the public summary.</p>
+        </div>
+        <div class="prose">
+          <div class="banner banner--warn"><p><strong>No external audit has been performed.</strong> Vexunori uses established, reviewed cryptography libraries (nostr-tools, the @noble libraries, the browser's WebCrypto), but the app as a whole has not been independently reviewed. Do not rely on it where a mistake could put someone in danger.</p></div>
+
+          <h2 id="assets">What we protect</h2>
+          <ul>
+            <li><strong>Message contents</strong> — text, reactions, edits, attachments, group names and workspace data.</li>
+            <li><strong>Your secret key</strong> — the key that is your identity and decrypts your messages.</li>
+            <li><strong>Your local data</strong> — messages, contacts, Vault items and settings stored on your device.</li>
+            <li><strong>Who talks to whom</strong> — partly. Sender identity is hidden from relays; the recipient is not. See the metadata table.</li>
+          </ul>
+
+          <h2 id="adversaries">Who we consider</h2>
+          <dl>
+            <dt>Relay operators</dt><dd>Store and forward encrypted envelopes. Cannot read them, but see recipient keys, timing, sizes and IP addresses, and may keep data as long as they like.</dd>
+            <dt>Network observers (Wi-Fi owner, ISP, state)</dt><dd>See that you connect to relays, when, and how much data flows. Connections use TLS (wss://), so they do not see envelopes.</dd>
+            <dt>Other participants</dt><dd>Read what you send them by design. They can screenshot, copy, forward or ignore delete requests.</dd>
+            <dt>Device thieves</dt><dd>Get your phone or computer. Protected by local encryption when the app is locked and you use a passphrase; not protected if the app is unlocked or you chose the web "device" key mode.</dd>
+            <dt>Malicious contacts</dt><dd>Send spam, harmful files or misleading links. Message requests, blocking, SendGuard and the link inspector help; they are not a malware scanner.</dd>
+          </dl>
+
+          <h2 id="layers">Five different kinds of protection</h2>
+          <div class="table-wrap"><table>
+            <thead><tr><th scope="col">Kind</th><th scope="col">What it means in Vexunori</th><th scope="col">Protects against</th><th scope="col">Does not protect against</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">End-to-end encryption</th><td>Messages are encrypted on your device for each recipient (NIP-44 v2) and only decrypted on theirs.</td><td>Relays, network observers and the website host reading content.</td><td>A compromised device at either end; recipients sharing what they read; later key theft (no forward secrecy).</td></tr>
+              <tr><th scope="row">Transport encryption</th><td>Connections to relays use TLS (wss://), except LAN relays you add on purpose.</td><td>Network observers seeing envelopes and recipient keys in transit.</td><td>The relay itself, which sees everything the envelope reveals.</td></tr>
+              <tr><th scope="row">Anonymity</th><td><strong>Not provided.</strong> Optional Tor on Android hides your IP address from relays.</td><td>With Tor: relays learning your IP address.</td><td>Timing correlation, your public key being linked to you, endpoint compromise.</td></tr>
+              <tr><th scope="row">Local encryption</th><td>Everything stored is AES-256-GCM encrypted. The key is protected by your passphrase or the Android Keystore.</td><td>Someone copying the app's files from a locked device.</td><td>Someone using your unlocked device; malware on the device; the web "device" key mode (no protection).</td></tr>
+              <tr><th scope="row">Offline transfer</th><td>QR parcels and parcel files carry the same sealed envelopes.</td><td>The carrier reading content.</td><td>The carrier seeing the recipient key, the number and size of envelopes.</td></tr>
+            </tbody>
+          </table></div>
+
+          <h2 id="metadata">Who sees what</h2>
+          <div class="table-wrap"><table>
+            <thead><tr><th scope="col">Who</th><th scope="col">Sees</th><th scope="col">Does not see</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">Relay operator</th><td>Recipient public key of every envelope; your IP address; when envelopes arrive and are fetched; sizes; your public key if your own relay requires authentication (NIP-42) to read your inbox.</td><td>Content; sender of an envelope (signed with a one-time key). Can often infer it from timing and IP when sender and recipient use the same relay.</td></tr>
+              <tr><th scope="row">Network / ISP</th><td>That you connect to specific relays, when, and how much data.</td><td>Envelopes and keys (TLS). With Tor: which relays you use.</td></tr>
+              <tr><th scope="row">Tor exit (Android + Orbot)</th><td>The relay addresses you connect to and the traffic volume. TLS still hides envelope contents.</td><td>Your IP address; content.</td></tr>
+              <tr><th scope="row">Recipients</th><td>Everything you send them, your public key, your display name, delivery and read receipts if you enable them. A call reveals your IP address.</td><td>Your other conversations.</td></tr>
+              <tr><th scope="row">Group members</th><td>All members' public keys, messages and workspace data.</td><td>Chat messages sent before they joined. (Shared workspace items <em>are</em> sent to new members.)</td></tr>
+              <tr><th scope="row">OS / push provider</th><td>No push provider is used. Your operating system sees notifications the app raises, according to your preview setting.</td><td>—</td></tr>
+              <tr><th scope="row">Website host</th><td>That your IP address loaded the web app or downloaded the APK (normal web server logs).</td><td>Anything you do in the app: it talks to relays directly.</td></tr>
+              <tr><th scope="row">Backup holders</th><td>An encrypted file and its size. With the backup passphrase: everything, including your secret key.</td><td>Content without the backup passphrase.</td></tr>
+              <tr><th scope="row">Recovery share holders</th><td>One share. Any <em>k</em> holders together can rebuild your secret key.</td><td>Your messages (shares contain only the key).</td></tr>
+            </tbody>
+          </table></div>
+
+          <h2 id="limits">Known limits</h2>
+          <ul>
+            <li><strong>No forward secrecy.</strong> NIP-44 does not provide it. Someone who stores envelopes and later steals your secret key can read them.</li>
+            <li><strong>Metadata is visible to relays</strong>, as described above. Use several relays, Tor on Android, or your own relay to reduce what one operator learns.</li>
+            <li><strong>Delete and disappearing messages</strong> are honoured by cooperating apps only.</li>
+            <li><strong>The web app is delivered by a web server.</strong> Whoever controls the server could deliver modified code. The Android app avoids this for the code it ships: an installed APK changes only when you install an update signed with the same key.</li>
+            <li><strong>The source code is not public and has not been audited.</strong> Vexunori is free to use but not open source, so nobody outside the project can currently review its code. The cryptography comes from open-source libraries (<code>nostr-tools</code>, <code>@noble/*</code>, WebCrypto); how the app uses them cannot be checked independently. See the <a href="/vexunori/source.html#security-review">licence page</a>.</li>
+            <li><strong>Not yet tested on real Android hardware.</strong> The 0.1.0 APK was built and checked by automated tests, but has not been run on a phone or an emulator.</li>
+            <li><strong>Contacts added only by their public key (npub)</strong> may not receive your messages: Vexunori does not look up their inbox relays (NIP-17 kind 10050 lists), so it sends to your own relays. Add contacts with their invite link or QR code, which includes their relays.</li>
+            <li><strong>No protection against a compromised device</strong> (malware, a hostile OS, a stolen unlocked phone).</li>
+            <li>Every feature's status and limits are on the <a href="/vexunori/features.html">Features page</a>.</li>
+          </ul>
+          <p>More detail: <a href="/vexunori/docs/privacy.html">privacy &amp; data handling</a>, <a href="/vexunori/docs/contacts-verification.html">contact verification</a>, <a href="/vexunori/docs/tor.html">Tor</a>.</p>
+
+          <h2 id="report">Report a vulnerability</h2>
+          <p>Please report security problems privately rather than in a public issue. The maintainer has not yet published a dedicated private security contact. Until one is listed here, do not post exploit details publicly; instead ask for a private channel through the contact route given at the end of the <a href="/vexunori/LICENSE.txt">licence text</a>, without technical details.</p>
+          <p>We do not run a bug bounty and cannot offer payment.</p>
+        </div>
+      </div>
+    </main>
+    <footer class="site-footer">
+      <div class="wrap">
+        <div>
+          <p><strong>Vexunori</strong> — Private by design. Connected by choice.</p>
+          <p>Free to use, not open source: see the <a href="/vexunori/source.html#licence">licence</a> and the <a href="/vexunori/source.html#open-source-components">open-source components</a> it uses.</p>
+          <p>No trackers, no analytics, no cookies.</p>
+        </div>
+        <nav aria-label="Footer">
+          <ul>
+            <li><a href="/vexunori/app/">Web app</a></li>
+            <li><a href="/vexunori/download.html">Download</a></li>
+            <li><a href="/vexunori/docs/">Docs</a></li>
+            <li><a href="/vexunori/docs/privacy.html">Privacy</a></li>
+            <li><a href="/vexunori/security.html">Security</a></li>
+            <li><a href="/vexunori/security.html#report">Report a vulnerability</a></li>
+            <li><a href="/vexunori/source.html">Licence</a></li>
+          </ul>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

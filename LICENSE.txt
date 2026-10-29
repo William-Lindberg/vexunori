@@ -1,0 +1,74 @@
+Vexunori License
+
+Copyright (c) 2026 William Matthew Lindberg. All rights reserved.
+
+Vexunori (the website, the web app, the Android app, their code, texts,
+icons and other content, together "the Software") is free to use, but it is
+not open source. The source code is not published. The Software is made only
+to be used: the website and web app to be visited and used, and the Android
+app (APK) to be downloaded from the official page and installed.
+
+1. What you may do
+
+   Free of charge, you may:
+   a. use the website and the web app, and download the Android app from the
+      official Vexunori download page and install it on your own devices,
+      for your own personal, non-commercial use;
+   b. use it within a non-commercial group, for example a family, a club or a
+      community, as long as nobody is charged for access to Vexunori itself;
+   c. make backups of your own Vexunori data, and share the messages, notes
+      and files you made yourself;
+   d. run the Vexunori relay software only if you have received it from the
+      copyright holder for that purpose.
+
+2. What you may not do
+
+   Without prior written permission from the copyright holder, you may not:
+   a. copy, reproduce, republish, re-upload or redistribute the Software or any
+      part of it, including the APK file and the website's files, except for
+      the copies made automatically when you install, run or visit it yourself;
+   b. modify, decompile, reverse engineer or take apart the Software, or make,
+      publish or distribute anything based on it (a "derivative work"),
+      including a renamed or rebranded version, except to the extent that the
+      law where you live allows this despite this restriction (for example for
+      security research or interoperability);
+   c. use the Software, or any part of it, for commercial purposes. This
+      includes selling it, charging for access to it, including it in a paid
+      product or service, showing ads in or around it, or using it to make
+      money in any other way;
+   d. remove or change this license or any copyright notice;
+   e. use the name "Vexunori" or the Vexunori logo for another product.
+
+3. Third-party libraries
+
+   Vexunori includes third-party open-source libraries. Each of them is
+   covered by its own license, listed under "Open-source licences" on the
+   website. Those licenses apply only to those libraries. They give no rights
+   to Vexunori itself or to any other part of the Software.
+
+4. GitHub
+
+   The website's files and the APK are hosted in a public GitHub repository.
+   GitHub's Terms of Service let GitHub users view and fork public
+   repositories on GitHub. That gives no rights beyond this license: you may
+   not use, change or distribute a fork or any of its files in any way
+   section 2 does not allow.
+
+5. Ending
+
+   If you break this license, your permission to use the Software ends
+   automatically.
+
+6. No warranty
+
+   The Software is provided "as is", without warranty of any kind, express or
+   implied, including the warranties of merchantability, fitness for a
+   particular purpose and non-infringement. Vexunori is a communication tool
+   and cannot guarantee privacy, anonymity or delivery of messages; see the
+   security documentation for its limits. In no event shall the copyright
+   holder be liable for any claim, damages or other liability, whether in
+   contract, tort or otherwise, arising from, out of or in connection with the
+   Software or its use.
+
+For permission to do anything not allowed above, including commercial use,
+contact the copyright holder through https://github.com/William-Lindberg.

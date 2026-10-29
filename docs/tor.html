@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; script-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="referrer" content="no-referrer" />
+    <meta name="description" content="Using Tor with Vexunori: Orbot on Android, what &quot;confirmed&quot; means, strict mode, what does not go through Tor, and limits in web browsers." />
+    <title>Tor · Vexunori</title>
+    <link rel="icon" href="/vexunori/favicon.svg" type="image/svg+xml" />
+    <script type="module" crossorigin src="/vexunori/assets/app-4_tHw1xm.js"></script>
+    <script type="module" crossorigin src="/vexunori/assets/site-CyJ87sLJ.js"></script>
+    <link rel="stylesheet" crossorigin href="/vexunori/assets/app-D4G53B2d.css">
+    <link rel="stylesheet" crossorigin href="/vexunori/assets/site-CIUq-uRg.css">
+  </head>
+  <body class="vx-site">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="wrap">
+        <a class="brand" href="/vexunori/" aria-label="Vexunori home"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="var(--accent)"/><g fill="var(--on-accent)"><circle cx="9.2" cy="9.6" r="1.9"/><circle cx="11.6" cy="14.6" r="1.9"/><circle cx="14" cy="19.6" r="1.9"/></g><path d="M16.4 24.2 L23.2 9.4" stroke="var(--on-accent)" stroke-width="3.6" stroke-linecap="round"/></svg><span>Vexunori</span></a>
+        <nav class="site-nav" id="site-nav" aria-label="Main">
+          <ul>
+            <li><a href="/vexunori/">Home</a></li>
+            <li><a href="/vexunori/features.html">Features</a></li>
+            <li><a href="/vexunori/download.html">Download</a></li>
+            <li><a href="/vexunori/docs/" aria-current="page">Docs</a></li>
+            <li><a href="/vexunori/security.html">Security</a></li>
+            <li><a href="/vexunori/source.html">Licence</a></li>
+          </ul>
+        </nav>
+        <div class="header-tools">
+          <a class="btn btn--primary" href="/vexunori/app/">Open Web App</a>
+          <button type="button" class="icon-btn" data-theme-toggle hidden aria-label="Switch theme"><svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg><svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+          <button type="button" class="icon-btn nav-toggle" data-nav-toggle hidden aria-expanded="false" aria-controls="site-nav" aria-label="Menu"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+        </div>
+      </div>
+    </header>
+    <main id="main" tabindex="-1">
+<div class="wrap doc-layout">
+        <nav class="doc-side" aria-label="Documentation">
+          <p class="doc-side__title">Guides</p>
+          <ul>
+              <li><a href="/vexunori/docs/">Overview</a></li>
+              <li><a href="/vexunori/docs/getting-started.html">Getting started</a></li>
+              <li><a href="/vexunori/docs/identity.html">Your identity</a></li>
+              <li><a href="/vexunori/docs/messaging.html">Messaging</a></li>
+              <li><a href="/vexunori/docs/contacts-verification.html">Contacts & verification</a></li>
+              <li><a href="/vexunori/docs/groups.html">Groups</a></li>
+              <li><a href="/vexunori/docs/files-and-sendguard.html">Files & SendGuard</a></li>
+              <li><a href="/vexunori/docs/morse.html">Morse</a></li>
+              <li><a href="/vexunori/docs/vault-and-spaces.html">Vault & Spaces</a></li>
+              <li><a href="/vexunori/docs/bridge-and-passports.html">Bridge & Passports</a></li>
+              <li><a href="/vexunori/docs/workspaces.html">Group workspaces</a></li>
+              <li><a href="/vexunori/docs/nearby-offline.html">Nearby & offline</a></li>
+              <li><a href="/vexunori/docs/tor.html" aria-current="page">Tor</a></li>
+              <li><a href="/vexunori/docs/backup-recovery.html">Backup & recovery</a></li>
+              <li><a href="/vexunori/docs/notifications-calls.html">Notifications & calls</a></li>
+              <li><a href="/vexunori/docs/self-hosting.html">Self-hosting</a></li>
+              <li><a href="/vexunori/docs/troubleshooting.html">Troubleshooting</a></li>
+              <li><a href="/vexunori/docs/privacy.html">Privacy & data handling</a></li>
+          </ul>
+        </nav>
+        <article class="prose">
+          <h1>Tor</h1>
+          <p>Tor hides your IP address from the relays you connect to. It does not hide your public key, and it does not protect against timing analysis or a compromised device.</p>
+
+          <h2 id="android">Android with Orbot <span class="pill pill--warn">Experimental</span></h2>
+          <ol>
+            <li>Install <strong>Orbot</strong> (from F-Droid or Google Play) and start it.</li>
+            <li>In Vexunori, <strong>Settings → Tor</strong>, choose <strong>Prefer Tor</strong> or <strong>Tor only (strict)</strong>. The proxy address defaults to Orbot's HTTP proxy, <code>127.0.0.1:8118</code>.</li>
+            <li>Vexunori tells Android System WebView to send all of the app's web traffic — relay connections and checks — through that proxy, and then runs a <strong>Tor check</strong>.</li>
+          </ol>
+          <p>The status says <strong>Tor confirmed</strong> only after the check sees your traffic leaving from a Tor exit. Until then it says "Checking", "Not using Tor" or "Check failed" — never a decorative onion icon.</p>
+          <p>This needs an Android System WebView that supports proxy override; the Tor settings tell you if yours does not. Tor mode has not yet been tested on a phone with Orbot.</p>
+
+          <h2 id="modes">Prefer vs strict</h2>
+          <dl>
+            <dt>Prefer Tor</dt><dd>Uses Orbot when possible. If Tor is not confirmed, Vexunori still connects directly and shows "Tor not confirmed".</dd>
+            <dt>Tor only (strict)</dt><dd>No relay connections at all until a check confirms Tor. If Orbot stops, connections are closed and messages wait in the queue. Calls are disabled, because their audio/video cannot go through Tor.</dd>
+          </dl>
+
+          <h2 id="what">What goes through Tor</h2>
+          <ul>
+            <li><strong>Through Tor</strong> (when confirmed): relay connections, the Tor check.</li>
+            <li><strong>Not through Tor</strong>: links you open — they open in your normal browser; calls (disabled in strict mode); parcel files shared via other apps.</li>
+          </ul>
+          <p>The Tor check contacts <code>check.torproject.org</code>, and as a fallback <code>api.ipify.org</code> (to learn the public address) and <code>onionoo.torproject.org</code> (to look it up in the Tor relay list). Checks run only while Tor mode is on or when you press "Check now".</p>
+          <p>The Vexunori app is not the Tor Browser, and the WebView inside it does not have Tor Browser's anti-fingerprinting protections.</p>
+
+          <h2 id="web">Web browsers</h2>
+          <p>A web page cannot send its own traffic through Tor. In a normal browser, Tor mode is <strong>unsupported</strong>. If you open the web app in <strong>Tor Browser</strong>, Vexunori can detect that and shows "Tor confirmed (this browser)"; strict mode then works too.</p>
+
+          <h2 id="trouble">Troubleshooting</h2>
+          <ul>
+            <li>"Not using Tor": check that Orbot is running and connected, and that its HTTP proxy port matches the setting.</li>
+            <li>"Check failed": the check services may be blocked or slow over Tor; press "Check now" again.</li>
+            <li>Some relays block Tor exits. Add relays that accept Tor if messages stay queued.</li>
+          </ul>
+          <nav class="cta-row" aria-label="Guide navigation">
+            <a class="btn" href="/vexunori/docs/nearby-offline.html">← Nearby & offline</a>
+            <a class="btn" href="/vexunori/docs/backup-recovery.html">Backup & recovery →</a>
+          </nav>
+        </article>
+      </div>
+    </main>
+    <footer class="site-footer">
+      <div class="wrap">
+        <div>
+          <p><strong>Vexunori</strong> — Private by design. Connected by choice.</p>
+          <p>Free to use, not open source: see the <a href="/vexunori/source.html#licence">licence</a> and the <a href="/vexunori/source.html#open-source-components">open-source components</a> it uses.</p>
+          <p>No trackers, no analytics, no cookies.</p>
+        </div>
+        <nav aria-label="Footer">
+          <ul>
+            <li><a href="/vexunori/app/">Web app</a></li>
+            <li><a href="/vexunori/download.html">Download</a></li>
+            <li><a href="/vexunori/docs/">Docs</a></li>
+            <li><a href="/vexunori/docs/privacy.html">Privacy</a></li>
+            <li><a href="/vexunori/security.html">Security</a></li>
+            <li><a href="/vexunori/security.html#report">Report a vulnerability</a></li>
+            <li><a href="/vexunori/source.html">Licence</a></li>
+          </ul>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>
