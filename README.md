@@ -28,7 +28,7 @@ No ads, no trackers, no AI features.
 ## How private is it?
 
 - Messages are end-to-end encrypted using the open Nostr NIP-17 standard. The relays that carry them cannot read them or see who sent them.
-- Relays can still see *who receives* a message, when, and how big it is, plus your IP address. Using Tor (experimental, Android with Orbot) hides your IP address.
+- Relays can still see *who receives* a message, when, and how big it is, plus your IP address. Using Tor (experimental, built into the Android app — no Orbot needed) hides your IP address.
 - Your data on the phone is encrypted. With a strong passphrase, it stays unreadable while the app is locked.
 - There is no forward secrecy yet, and Vexunori has **not** had an independent security audit.
 
@@ -44,7 +44,8 @@ Read the [security page](https://william-lindberg.github.io/vexunori/security.ht
 | Group messaging | ✅ | ✅ | ✅ | ◐ |
 | Voice and video calls | 🧪 1:1 only | ✅ | ✅ | ❌ |
 | Disappearing messages | ✅ | ✅ | ✅ | ◐ 1:1 only |
-| Tor connectivity | 🧪 Android | ❌ | ✅ | ✅ |
+| Tor connectivity | ✅ built in (Android) | ❌ | ✅ | ✅ |
+| Built-in private browser over Tor (anti-fingerprinting) | ✅ Android | ❌ | ❌ | ❌ |
 | Offline messaging over Bluetooth | ◐ via file sharing | ❌ | ❌ | ✅ |
 | Local Wi-Fi communication | 🧪 local relay | ❌ | ❌ | ✅ |
 | Morse code tools (text, sound, light, vibration) | ✅ | ❌ | ❌ | ❌ |
@@ -68,7 +69,7 @@ Other apps change over time. This table reflects our understanding in October 20
 
 - **Version 0.1.0.** The Android app has been built and checked, but not yet tested on many real phones.
 - **Notifications** only arrive while Vexunori is running. There is no push service.
-- **Calls, Tor and local Wi-Fi** are experimental. Calls are off by default because they show your IP address to the other person.
+- **Calls, Tor, the Private Browser and local Wi-Fi** are experimental. Built-in Tor and the Private Browser have not yet been tested on a real device. The Private Browser is not Tor Browser: it blocks many fingerprinting tricks, but the WebView engine, fonts and TLS fingerprint can still identify it — for the strongest protection use the official Tor Browser. Calls are off by default because they show your IP address to the other person.
 - **Add people with an invite link.** Contacts added by key only may not receive your messages.
 - **Back up.** If you lose your phone and your passphrase without a backup, your identity and messages cannot be recovered.
 

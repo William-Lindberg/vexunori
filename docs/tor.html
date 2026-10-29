@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="light dark" />
     <meta name="referrer" content="no-referrer" />
-    <meta name="description" content="Using Tor with Vexunori: Orbot on Android, what &quot;confirmed&quot; means, strict mode, what does not go through Tor, and limits in web browsers." />
+    <meta name="description" content="Using Tor with Vexunori: built-in Tor on Android (no Orbot needed), the Private Browser via Tor, what &quot;confirmed&quot; means, strict mode, and limits in web browsers." />
     <title>Tor · Vexunori</title>
     <link rel="icon" href="/vexunori/favicon.svg" type="image/svg+xml" />
     <script type="module" crossorigin src="/vexunori/assets/app-4_tHw1xm.js"></script>
-    <script type="module" crossorigin src="/vexunori/assets/site-Dp17vPLm.js"></script>
+    <script type="module" crossorigin src="/vexunori/assets/site-f9JA0ojA.js"></script>
     <link rel="stylesheet" crossorigin href="/vexunori/assets/app-D4G53B2d.css">
     <link rel="stylesheet" crossorigin href="/vexunori/assets/site-CIUq-uRg.css">
   </head>
@@ -64,37 +64,79 @@
         <article class="prose">
           <h1>Tor</h1>
           <p>Tor hides your IP address from the relays you connect to. It does not hide your public key, and it does not protect against timing analysis or a compromised device.</p>
+          <p>The Android app has <strong>Tor built in</strong>: you do not need Orbot or any other app. Built-in Tor and the Private Browser are new in 1.0.0 and <strong>have not yet been tested on a real device</strong>.</p>
 
-          <h2 id="android">Android with Orbot <span class="pill pill--warn">Experimental</span></h2>
+          <h2 id="android">Built-in Tor on Android <span class="pill pill--warn">Experimental</span></h2>
           <ol>
-            <li>Install <strong>Orbot</strong> (from F-Droid or Google Play) and start it.</li>
-            <li>In Vexunori, <strong>Settings → Tor</strong>, choose <strong>Prefer Tor</strong> or <strong>Tor only (strict)</strong>. The proxy address defaults to Orbot's HTTP proxy, <code>127.0.0.1:8118</code>.</li>
-            <li>Vexunori tells Android System WebView to send all of the app's web traffic — relay connections and checks — through that proxy, and then runs a <strong>Tor check</strong>.</li>
+            <li>Open <strong>Settings → Tor</strong> and choose <strong>Prefer Tor</strong> or <strong>Tor only (strict)</strong>.</li>
+            <li>Under <strong>Which Tor</strong>, keep <strong>Built-in Tor (recommended)</strong>.</li>
+            <li>Vexunori starts Tor inside the app. A progress bar shows how far it is. <strong>Connecting to Tor can take up to a minute</strong>, longer on slow networks.</li>
+            <li>When Tor is ready, Vexunori tells Android System WebView to send all of the app's web traffic — relay connections and checks — through Tor, and then runs a <strong>Tor check</strong>.</li>
           </ol>
-          <p>The status says <strong>Tor confirmed</strong> only after the check sees your traffic leaving from a Tor exit. Until then it says "Checking", "Not using Tor" or "Check failed" — never a decorative onion icon.</p>
-          <p>This needs an Android System WebView that supports proxy override; the Tor settings tell you if yours does not. Tor mode has not yet been tested on a phone with Orbot.</p>
+          <p>The status says <strong>Tor confirmed</strong> only after the check sees your traffic leaving from a Tor exit. Until then it says "Connecting to Tor… 45%", "Checking", "Not using Tor" or "Tor check failed" — never a decorative onion icon. If Tor fails, the app says so; it never quietly switches to a direct connection in strict mode.</p>
+          <p>With Tor mode on, Tor starts automatically every time you open the app. <strong>New identity</strong> asks Tor for new circuits, so relays see a different Tor exit. This needs an Android System WebView that supports proxy override; the Tor settings tell you if yours does not. The built-in Tor makes the APK about 20–30 MB larger. It does not support bridges yet.</p>
+
+          <h3 id="orbot">Advanced: use Orbot instead</h3>
+          <p>If you already run <strong>Orbot</strong>, choose <strong>Advanced: use Orbot instead</strong>. Vexunori then uses Orbot's HTTP proxy (default <code>127.0.0.1:8118</code>). You start and connect Orbot yourself. Orbot is also the way to use bridges where Tor is blocked.</p>
 
           <h2 id="modes">Prefer vs strict</h2>
           <dl>
-            <dt>Prefer Tor</dt><dd>Uses Orbot when possible. If Tor is not confirmed, Vexunori still connects directly and shows "Tor not confirmed".</dd>
-            <dt>Tor only (strict)</dt><dd>No relay connections at all until a check confirms Tor. If Orbot stops, connections are closed and messages wait in the queue. Calls are disabled, because their audio/video cannot go through Tor.</dd>
+            <dt>Prefer Tor</dt><dd>Uses Tor when possible. While Tor is still connecting, or if it fails, Vexunori connects directly and shows "Tor not confirmed".</dd>
+            <dt>Tor only (strict)</dt><dd>No relay connections at all until a check confirms Tor. If Tor stops, connections fail and messages wait in the queue. Calls are disabled, because their audio/video cannot go through Tor.</dd>
           </dl>
 
           <h2 id="what">What goes through Tor</h2>
           <ul>
             <li><strong>Through Tor</strong> (when confirmed): relay connections, the Tor check.</li>
-            <li><strong>Not through Tor</strong>: links you open — they open in your normal browser; calls (disabled in strict mode); parcel files shared via other apps.</li>
+            <li><strong>Always through Tor</strong>: the <a href="#private-browser">Private Browser</a>, whether or not Tor mode is on.</li>
+            <li><strong>Not through Tor</strong>: links you open in your normal browser; calls (disabled in strict mode); parcel files shared via other apps; traffic from Android itself and other apps.</li>
           </ul>
           <p>The Tor check contacts <code>check.torproject.org</code>, and as a fallback <code>api.ipify.org</code> (to learn the public address) and <code>onionoo.torproject.org</code> (to look it up in the Tor relay list). Checks run only while Tor mode is on or when you press "Check now".</p>
-          <p>The Vexunori app is not the Tor Browser, and the WebView inside it does not have Tor Browser's anti-fingerprinting protections.</p>
+          <p>Tor mode protects Vexunori's own connections. The app's WebView is not Tor Browser and does not have its anti-fingerprinting protections.</p>
+
+          <h2 id="private-browser">Private Browser · via Tor <span class="pill pill--warn">Experimental</span></h2>
+          <p>On Android, the <strong>Browser</strong> page opens web pages and <code>.onion</code> sites through the built-in Tor. It runs in its own process, separate from your chats and Vault, and loads nothing if Tor is not ready. If Tor mode is off, the Browser page can start Tor just for the browser; your chats keep connecting directly.</p>
+          <p>Use the address field, or the quick buttons: a <strong>Tor connection test</strong> (check.torproject.org) and <strong>DuckDuckGo as an onion service</strong>. Anything that is not a web address is refused with a hint — nothing is searched for you behind your back. In the Link Inspector, <strong>Open in Private Browser (Tor)</strong> opens a link there.</p>
+          <h3 id="levels">Security levels</h3>
+          <dl>
+            <dt>Standard</dt><dd>JavaScript on and all protections on. WebGL and WebRTC are always blocked.</dd>
+            <dt>Safer (default)</dt><dd>JavaScript on, but WebAssembly, web workers and WebGL are blocked too.</dd>
+            <dt>Safest</dt><dd>JavaScript off. The strongest option; many sites look plain or do not work.</dd>
+          </dl>
+          <h3 id="protects">What the Private Browser protects</h3>
+          <ul>
+            <li>WebRTC is blocked, so a page cannot leak your real IP address through it.</li>
+            <li>A uniform user agent that matches the real browser engine.</li>
+            <li>Rounded window and screen sizes (letterboxing).</li>
+            <li>Timezone set to UTC and language to en-US.</li>
+            <li>Fixed hardware values.</li>
+            <li>Canvas readback blocked; WebGL and audio fingerprinting blocked.</li>
+            <li>Reduced timer precision.</li>
+            <li>Sensors, battery, Bluetooth, USB and similar device APIs removed.</li>
+            <li>HTTPS only (except <code>.onion</code> sites), with a warning before any insecure page.</li>
+            <li>Each site gets its own Tor circuit (stream isolation).</li>
+            <li>Third-party cookies off; everything is wiped when you close the browser and on New identity.</li>
+            <li>Google Safe Browsing and WebView metrics turned off, so no address lookups leave outside Tor.</li>
+            <li>Downloads, camera, microphone and location blocked; screenshots blocked.</li>
+          </ul>
+          <h3 id="limits">What it can't fully hide</h3>
+          <ul>
+            <li>The browser engine (Android System WebView) can still be identified.</li>
+            <li>Font measurement tricks.</li>
+            <li>The TLS fingerprint of the connection.</li>
+            <li>The system language may still appear in some background requests.</li>
+            <li>Very determined sites may still tell devices apart.</li>
+          </ul>
+          <p><strong>It is not Tor Browser.</strong> It has its own anti-fingerprinting, but it cannot match Tor Browser's, so sites may still recognise this device. For the strongest protection use the official Tor Browser from the Tor Project (<code>torproject.org/download</code>).</p>
 
           <h2 id="web">Web browsers</h2>
-          <p>A web page cannot send its own traffic through Tor. In a normal browser, Tor mode is <strong>unsupported</strong>. If you open the web app in <strong>Tor Browser</strong>, Vexunori can detect that and shows "Tor confirmed (this browser)"; strict mode then works too.</p>
+          <p>A website cannot run Tor or send its own traffic through Tor. In a normal browser, Tor mode is <strong>unsupported</strong> and the built-in Tor option is shown as "Android app only". If you open the web app in <strong>Tor Browser</strong>, Vexunori can detect that and shows "Tor confirmed (this browser)"; strict mode then works too. The Private Browser is not available on the web; the Browser page links to the official Tor Browser instead.</p>
 
           <h2 id="trouble">Troubleshooting</h2>
           <ul>
-            <li>"Not using Tor": check that Orbot is running and connected, and that its HTTP proxy port matches the setting.</li>
-            <li>"Check failed": the check services may be blocked or slow over Tor; press "Check now" again.</li>
+            <li>Stuck at "Connecting to Tor": check your internet connection and wait up to a minute. Switch Tor mode off and on to restart Tor. Where Tor is blocked, use Orbot with bridges.</li>
+            <li>"Tor check failed" right after connecting: the first circuits can be slow. Press "Check now" again.</li>
+            <li>With Orbot: "Not using Tor" means Orbot is not running or connected, or its HTTP proxy port does not match the setting.</li>
             <li>Some relays block Tor exits. Add relays that accept Tor if messages stay queued.</li>
           </ul>
           <nav class="cta-row" aria-label="Guide navigation">

@@ -1,15 +1,20 @@
 {
-  "version": "0.2.1",
-  "versionCode": 201,
-  "buildDate": "2026-10-29T14:47:25.567Z",
-  "file": "vexunori-0.2.1.apk",
-  "size": 3907424,
-  "sha256": "788945acde1ce681b140b3c0b420a1d785a0ba9443fa8b27e24c0b8f3fa22a13",
+  "version": "1.0.0",
+  "versionCode": 10000,
+  "buildDate": "2026-10-29T15:25:51.385Z",
+  "file": "vexunori-1.0.0.apk",
+  "size": 13660566,
+  "sha256": "e6a27c54e9f28ebe0c5cd84fe4b2a4f06064e1fe2dc8232e1c96e862b43bc0e3",
   "minAndroid": "7.0",
   "signingCertSha256": "b96be6c7d263d56bd40b8479d02f94db6f848dae99f5ae6523b19b4b1087433b",
   "notes": [
-    "Disguise: on the Notes, Weather, Clock, Calendar and Flashlight screens you can now tap the title 5 times quickly to open the code box. Press-and-hold still works, but on phones it was easily cancelled by the slightest finger movement.",
-    "Disguise: if you forget the code, your app PIN now works as well as your passphrase.",
-    "Disguise settings and the privacy guide now explain how to open the real app."
+    "Built-in Tor on Android: the app now runs Tor itself, so Orbot is no longer needed. Choose Settings → Tor → \"Built-in Tor (recommended)\". With Tor mode on, Tor starts when the app opens; connecting can take up to a minute and a progress bar shows how far it is. The status says \"confirmed\" only after a check sees your traffic leave from a Tor exit. Strict mode keeps relay connections blocked until then and never falls back to a direct connection. \"New identity\" asks Tor for new circuits.",
+    "Orbot is still supported as \"Advanced: use Orbot instead\", for people who already run it. Existing Tor users are switched to the built-in Tor; pick Orbot there to keep using it.",
+    "Private Browser · via Tor (Android, experimental): browse the web and .onion sites through the built-in Tor, in a separate process with no access to your chats or Vault. It loads nothing if Tor is not ready. Security levels Standard, Safer (default) and Safest (JavaScript off). It blocks WebRTC, canvas readback, WebGL and audio fingerprinting, sensors and similar device APIs; uses a uniform user agent, rounded window sizes, UTC time and en-US language; is HTTPS-only except for .onion; gives each site its own Tor circuit; and wipes everything on close and on New identity. Downloads, camera, microphone, location and screenshots are blocked.",
+    "The Private Browser is NOT Tor Browser: the WebView engine, font measurements and the TLS fingerprint can still identify it, and very determined sites may still tell devices apart. For the strongest protection use the official Tor Browser.",
+    "Links: the Link Inspector can open a web link in the Private Browser (Android).",
+    "The Android APK is larger, by about 20–30 MB, because it now contains Tor.",
+    "Built-in Tor and the Private Browser have not yet been tested on a real device. Bridges (for places where Tor is blocked) are not supported by the built-in Tor yet; use Orbot or Tor Browser there.",
+    "Web: a website cannot run Tor. The web app still only detects and reports when it is opened in Tor Browser, and the Browser page points to the official Tor Browser."
   ]
 }

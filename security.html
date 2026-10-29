@@ -10,7 +10,7 @@
     <title>Security & privacy · Vexunori</title>
     <link rel="icon" href="/vexunori/favicon.svg" type="image/svg+xml" />
     <script type="module" crossorigin src="/vexunori/assets/app-4_tHw1xm.js"></script>
-    <script type="module" crossorigin src="/vexunori/assets/site-Dp17vPLm.js"></script>
+    <script type="module" crossorigin src="/vexunori/assets/site-f9JA0ojA.js"></script>
     <link rel="stylesheet" crossorigin href="/vexunori/assets/app-D4G53B2d.css">
     <link rel="stylesheet" crossorigin href="/vexunori/assets/site-CIUq-uRg.css">
   </head>
@@ -68,7 +68,7 @@
             <tbody>
               <tr><th scope="row">End-to-end encryption</th><td>Messages are encrypted on your device for each recipient (NIP-44 v2) and only decrypted on theirs.</td><td>Relays, network observers and the website host reading content.</td><td>A compromised device at either end; recipients sharing what they read; later key theft (no forward secrecy).</td></tr>
               <tr><th scope="row">Transport encryption</th><td>Connections to relays use TLS (wss://), except LAN relays you add on purpose.</td><td>Network observers seeing envelopes and recipient keys in transit.</td><td>The relay itself, which sees everything the envelope reveals.</td></tr>
-              <tr><th scope="row">Anonymity</th><td><strong>Not provided.</strong> Optional Tor on Android hides your IP address from relays.</td><td>With Tor: relays learning your IP address.</td><td>Timing correlation, your public key being linked to you, endpoint compromise.</td></tr>
+              <tr><th scope="row">Anonymity</th><td><strong>Not provided.</strong> Optional Tor, built into the Android app, hides your IP address from relays.</td><td>With Tor: relays learning your IP address.</td><td>Timing correlation, your public key being linked to you, endpoint compromise.</td></tr>
               <tr><th scope="row">Local encryption</th><td>Everything stored is AES-256-GCM encrypted. The key is protected by your passphrase or the Android Keystore.</td><td>Someone copying the app's files from a locked device.</td><td>Someone using your unlocked device; malware on the device; the web "device" key mode (no protection).</td></tr>
               <tr><th scope="row">Offline transfer</th><td>QR parcels and parcel files carry the same sealed envelopes.</td><td>The carrier reading content.</td><td>The carrier seeing the recipient key, the number and size of envelopes.</td></tr>
             </tbody>
@@ -80,7 +80,8 @@
             <tbody>
               <tr><th scope="row">Relay operator</th><td>Recipient public key of every envelope; your IP address; when envelopes arrive and are fetched; sizes; your public key if your own relay requires authentication (NIP-42) to read your inbox.</td><td>Content; sender of an envelope (signed with a one-time key). Can often infer it from timing and IP when sender and recipient use the same relay.</td></tr>
               <tr><th scope="row">Network / ISP</th><td>That you connect to specific relays, when, and how much data.</td><td>Envelopes and keys (TLS). With Tor: which relays you use.</td></tr>
-              <tr><th scope="row">Tor exit (Android + Orbot)</th><td>The relay addresses you connect to and the traffic volume. TLS still hides envelope contents.</td><td>Your IP address; content.</td></tr>
+              <tr><th scope="row">Tor exit (Android: built-in Tor or Orbot)</th><td>The relay addresses you connect to and the traffic volume. TLS still hides envelope contents.</td><td>Your IP address; content.</td></tr>
+              <tr><th scope="row">Websites in the Private Browser (Android)</th><td>A Tor exit's IP address (or nothing, for .onion sites); what you do on the site; anything the WebView engine, fonts or TLS fingerprint reveal.</td><td>Your IP address; your chats, keys and Vault (separate process); most device fingerprint values, which are blocked or made uniform.</td></tr>
               <tr><th scope="row">Recipients</th><td>Everything you send them, your public key, your display name, delivery and read receipts if you enable them. A call reveals your IP address.</td><td>Your other conversations.</td></tr>
               <tr><th scope="row">Group members</th><td>All members' public keys, messages and workspace data.</td><td>Chat messages sent before they joined. (Shared workspace items <em>are</em> sent to new members.)</td></tr>
               <tr><th scope="row">OS / push provider</th><td>No push provider is used. Your operating system sees notifications the app raises, according to your preview setting.</td><td>—</td></tr>
@@ -90,6 +91,11 @@
             </tbody>
           </table></div>
 
+          <h2 id="tor-browser">Built-in Tor and the Private Browser</h2>
+          <p>On Android, Vexunori runs Tor inside the app. With Tor mode on, the app's own traffic — relay connections and the Tor check — goes through it once a check confirms a Tor exit; strict mode blocks relays until then and never falls back to a direct connection. Calls, links opened in your normal browser and other apps do not use it.</p>
+          <p>The <strong>Private Browser</strong> always uses the built-in Tor, in a separate process from your chats and Vault, and loads nothing if Tor is not ready. It blocks WebRTC, canvas readback, WebGL and audio fingerprinting, and sensors and similar device APIs; it uses a uniform user agent, rounded window sizes, UTC time and en-US language, HTTPS only (except .onion), one Tor circuit per site, and wipes everything on close. Safest mode turns JavaScript off.</p>
+          <p><strong>In-app browser vs Tor Browser:</strong> the Private Browser is not Tor Browser. The Android WebView engine, font measurements and the TLS fingerprint can still identify it, the system language may appear in some background requests, and very determined sites may still tell devices apart. Tor Browser is built so that all its users look the same; the Private Browser only gets closer to that. For the strongest protection use the official Tor Browser. Built-in Tor and the Private Browser have not yet been tested on a real device. Details: <a href="/vexunori/docs/tor.html#private-browser">Private Browser</a>.</p>
+
           <h2 id="limits">Known limits</h2>
           <ul>
             <li><strong>No forward secrecy.</strong> NIP-44 does not provide it. Someone who stores envelopes and later steals your secret key can read them.</li>
@@ -97,7 +103,7 @@
             <li><strong>Delete and disappearing messages</strong> are honoured by cooperating apps only.</li>
             <li><strong>The web app is delivered by a web server.</strong> Whoever controls the server could deliver modified code. The Android app avoids this for the code it ships: an installed APK changes only when you install an update signed with the same key.</li>
             <li><strong>The source code is not public and has not been audited.</strong> Vexunori is free to use but not open source, so nobody outside the project can currently review its code. The cryptography comes from open-source libraries (<code>nostr-tools</code>, <code>@noble/*</code>, WebCrypto); how the app uses them cannot be checked independently. See the <a href="/vexunori/source.html#security-review">licence page</a>.</li>
-            <li><strong>Not yet tested on real Android hardware.</strong> The 0.1.0 APK was built and checked by automated tests, but has not been run on a phone or an emulator.</li>
+            <li><strong>Not yet tested on real Android hardware.</strong> The APK is built and checked by automated tests, but has not been run on a phone or an emulator.</li>
             <li><strong>Contacts added only by their public key (npub)</strong> may not receive your messages: Vexunori does not look up their inbox relays (NIP-17 kind 10050 lists), so it sends to your own relays. Add contacts with their invite link or QR code, which includes their relays.</li>
             <li><strong>No protection against a compromised device</strong> (malware, a hostile OS, a stolen unlocked phone).</li>
             <li>Every feature's status and limits are on the <a href="/vexunori/features.html">Features page</a>.</li>
