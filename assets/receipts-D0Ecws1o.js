@@ -1,1 +1,0 @@
-import{p as e,r as t}from"./db-MaTW7pv4.js";var n=t(`receipts`);async function r(t,r,i){e()&&await n.put({id:crypto.randomUUID(),at:Date.now(),kind:t,summary:r,details:i})}export{n,r as t};

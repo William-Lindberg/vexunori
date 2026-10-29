@@ -10,7 +10,7 @@
     <title>Your identity · Vexunori</title>
     <link rel="icon" href="/vexunori/favicon.svg" type="image/svg+xml" />
     <script type="module" crossorigin src="/vexunori/assets/app-4_tHw1xm.js"></script>
-    <script type="module" crossorigin src="/vexunori/assets/site-BbUp1yna.js"></script>
+    <script type="module" crossorigin src="/vexunori/assets/site-Bl5Pi7cw.js"></script>
     <link rel="stylesheet" crossorigin href="/vexunori/assets/app-D4G53B2d.css">
     <link rel="stylesheet" crossorigin href="/vexunori/assets/site-CIUq-uRg.css">
   </head>
@@ -78,14 +78,24 @@
           <div class="table-wrap"><table>
             <thead><tr><th scope="col">Mode</th><th scope="col">How the data key is protected</th><th scope="col">Protects against</th><th scope="col">Does not protect against</th></tr></thead>
             <tbody>
-              <tr><th scope="row">Passphrase</th><td>Wrapped by a key derived from your passphrase (PBKDF2-SHA256, 600 000 iterations).</td><td>Someone copying your data or using your device while Vexunori is locked.</td><td>A weak passphrase; someone watching you type; malware.</td></tr>
-              <tr><th scope="row">PIN (6+ digits)</th><td>Same as a passphrase: PBKDF2-SHA256, 600 000 iterations.</td><td>Someone using your device while Vexunori is locked (the app slows down repeated guesses).</td><td>Someone who copies the app data: a 6-digit PIN has only a million options and can be guessed offline on a fast computer.</td></tr>
+              <tr><th scope="row">Passphrase</th><td>Wrapped by a key derived from your passphrase with Argon2id (64 MiB of memory, 3 passes per guess). See <a href="#kdf">below</a>.</td><td>Someone copying your data or using your device while Vexunori is locked.</td><td>A weak passphrase; someone watching you type; malware.</td></tr>
+              <tr><th scope="row">PIN (6+ digits)</th><td>Argon2id like a passphrase, with one extra pass (64 MiB, 4 passes) because a PIN has far fewer possibilities.</td><td>Someone using your device while Vexunori is locked (the app slows down repeated guesses).</td><td>Someone who copies the app data: a 6-digit PIN has only a million options. Argon2id makes each guess slow and memory-hungry, but a determined attacker can still try them all offline.</td></tr>
               <tr><th scope="row">PIN + Android Keystore</th><td>Wrapped by the PIN-derived key, then again by a non-exportable Android Keystore key.</td><td>Copying the app's files off the phone (the PIN cannot be guessed offline without this phone's Keystore).</td><td>Someone who can try PINs on your phone itself (slowed by the delay). If the Keystore key is lost, the data cannot be opened.</td></tr>
               <tr><th scope="row">Android Keystore</th><td>Wrapped by a non-exportable key in the Android Keystore.</td><td>Copying the app's files off the phone.</td><td>Someone who can unlock and use your phone.</td></tr>
               <tr><th scope="row">No passphrase (web)</th><td>Stored next to the data.</td><td>Nothing at rest.</td><td>Anyone with access to the browser profile.</td></tr>
             </tbody>
           </table></div>
           <p>You can change mode, passphrase or PIN in <strong>Settings → Security</strong>. After several wrong attempts the app makes you wait before trying again (on the lock screen and the frozen screen). This delay only slows guessing inside the app; it does not slow someone who copied the data.</p>
+          <h3 id="kdf">Argon2id: why guessing your passphrase is slow</h3>
+          <p>Your passphrase or PIN is turned into a key with <strong>Argon2id</strong>, the password hashing method recommended by RFC 9106. It is <em>memory-hard</em>: every single guess must fill and re-read 64 MiB of memory. Graphics cards (GPUs) and custom chips are fast at guessing because they run thousands of guesses side by side; with Argon2id each of those guesses needs its own 64 MiB, so far fewer fit at once and each one takes longer. The older method, PBKDF2, needs almost no memory per guess, which is exactly what GPUs are good at.</p>
+          <ul>
+            <li><strong>Passphrases:</strong> 64 MiB, 3 passes. <strong>PINs:</strong> 64 MiB, 4 passes. Unlocking takes a moment on purpose.</li>
+            <li><strong>PINs benefit most</strong>, because they have few possibilities. Still, Argon2id only slows guessing down: a 6-digit PIN that someone copies off the device can eventually be found. Use a longer PIN, a passphrase, or PIN + Android Keystore if that matters to you.</li>
+            <li>If a device cannot spare 64 MiB, Vexunori uses 32 MiB instead and remembers that. It never switches to the weaker PBKDF2 for a new key.</li>
+            <li><strong>Upgrade from older versions:</strong> data protected by an older version (PBKDF2-SHA256, 600 000 rounds) still opens. Right after the next successful unlock, Vexunori re-protects the same data key with Argon2id in one step; if that fails, the old protection keeps working and it tries again next time. A hidden profile is upgraded the first time you open it; until then its unlock takes a different amount of time than the others.</li>
+          </ul>
+          <h3 id="strength">Strength meter</h3>
+          <p>When you choose a passphrase, PIN, backup passphrase or export password, a meter rates it from 0 to 4 using <strong>zxcvbn</strong>, which knows common passwords, words, names, dates and keyboard patterns. Passphrases must reach at least 3 ("Good"). For PINs the usual PIN rules apply and the meter warns about patterns such as dates. The meter also shows a <em>rough</em> time to guess for someone who copied the app data, assuming about 10 000 guesses per second against our Argon2id setting — an estimate, not a promise. The word lists load only when you start typing, and what you type is never stored, logged or sent.</p>
           <p><strong>Auto-lock</strong> (default 15 minutes) locks the app when it is in the background or idle. <strong>Emergency Freeze</strong> in the Privacy Center locks immediately, drops keys from memory and closes connections; you need your passphrase (or an explicit "Unfreeze") to continue. It does not delete anything and cannot reach other devices.</p>
 
           <h2 id="hidden">Hidden profile</h2>
@@ -101,9 +111,18 @@
 
           <h2 id="export">Export and import</h2>
           <ul>
-            <li><strong>Export</strong> your secret key from Settings as an encrypted <code>ncryptsec</code> (NIP-49, protected by a password you choose) or as a plain <code>nsec</code>. The app asks you to confirm first. A plain nsec is your whole identity in one line: store it like a password, never paste it into a website.</li>
+            <li><strong>Export</strong> your secret key from Settings as a <a href="#recovery-phrase">24-word recovery phrase</a>, an encrypted <code>ncryptsec</code> (NIP-49, protected by a password you choose) or as a plain <code>nsec</code>. The app asks you to confirm first. A plain nsec is your whole identity in one line: store it like a password, never paste it into a website.</li>
             <li><strong>Import</strong> an nsec or ncryptsec when you create a profile to keep using an existing key.</li>
             <li>To move to a new phone, prefer <a href="/vexunori/docs/backup-recovery.html#link">device linking</a> or a full <a href="/vexunori/docs/backup-recovery.html#backup">encrypted backup</a>, which also bring your contacts and settings.</li>
+          </ul>
+
+          <h2 id="recovery-phrase">Recovery phrase (24 words)</h2>
+          <p><strong>Settings → Security → Show recovery phrase</strong> shows your secret key as <strong>24 words</strong> from the standard BIP-39 English word list, after you type your passphrase or PIN again. Write them on paper in order, then answer a short check (words 3, 11 and 20). Each time the words are shown, a privacy receipt is logged (without the words).</p>
+          <div class="banner banner--warn"><p>Anyone with these words can take over your identity. Write them on paper; never photograph or share them.</p></div>
+          <ul>
+            <li>To use them, choose <strong>Restore from recovery phrase</strong> on the welcome screen of a fresh install, type the 24 words (suggestions come from the word list) and choose how the device protects your data. A built-in checksum catches most typos and swapped words.</li>
+            <li>They bring back your <strong>identity only</strong>, not contacts, chats or settings. Use a backup for those.</li>
+            <li><strong>Not a Nostr "seed phrase" (NIP-06).</strong> These words encode your key directly. Some Nostr apps turn a seed phrase into a key in a different way (NIP-06), so they will produce a different key from these words. To use your identity in another Nostr app, export your nsec or ncryptsec instead.</li>
           </ul>
 
           <h2 id="change">If your key is exposed</h2>

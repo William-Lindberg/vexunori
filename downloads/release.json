@@ -1,18 +1,19 @@
 {
-  "version": "1.1.0",
-  "versionCode": 10100,
-  "buildDate": "2026-10-29T16:47:04.625Z",
-  "file": "vexunori-1.1.0.apk",
-  "size": 13673120,
-  "sha256": "be952e21068da3a6c3e544b4a39fca63b00f4e044ed534657fb0a49ab2e3d674",
+  "version": "1.2.0",
+  "versionCode": 10200,
+  "buildDate": "2026-10-29T17:57:08.529Z",
+  "file": "vexunori-1.2.0.apk",
+  "size": 14562834,
+  "sha256": "df8d29b5929837c16340461c690f30c9a5ab16dc72304d6bb2bb67c158636f7c",
   "minAndroid": "7.0",
   "signingCertSha256": "b96be6c7d263d56bd40b8479d02f94db6f848dae99f5ae6523b19b4b1087433b",
   "notes": [
-    "Secret Morse (one-to-one chats and the Morse screen): your message becomes a code made from your and your contact's private keys, with a new code for every message. Only your two phones can decode it; the recipient sees the decoded text automatically, and anyone who hears or sees the Morse only gets the code. Plain text is never stored. It is modern encryption, not a one-time pad (the one-time pad is still available).",
-    "Contacts added only by their key can now be reached: Vexunori publishes the relays where you receive messages (NIP-17 inbox relay list; can be turned off in Settings → Relays) and looks up your contacts' lists, also via the purplepag.es directory.",
-    "Privacy Center shows whether a VPN is on (Android), with a guide to using Proton VPN Free alongside Vexunori. New Android permission: ACCESS_NETWORK_STATE (connection type only, no prompt).",
-    "Settings → Tor explains what to do when Tor is blocked (Orbot with bridges). Built-in bridges are not included because the bridge library contains GPL code.",
-    "Disguise: without a passphrase or PIN you can now get back in with your secret key if you forget the code.",
+    "Secret Morse is now hidden behind \"Tap to reveal\" by default: revealing asks for your PIN or passphrase again, and the text hides itself after 30 seconds, when you leave the chat or switch apps. Turning this off also needs your PIN or passphrase.",
+    "Optional secret phrase per contact: agree on a phrase in person; it is never sent or saved, and without it nobody can decode your Secret Morse — not even someone holding your unlocked phone.",
+    "Optional burn after reading for Secret Morse: readable once, then deleted from both phones.",
+    "Your passphrase and PIN are now protected with Argon2id (memory-hard; much harder to guess with graphics cards). Existing profiles upgrade automatically the next time you unlock. New backups use Argon2id too; older backups still restore. Vault export bundles and protected Spaces still use PBKDF2 for now.",
+    "A much better strength meter (zxcvbn) when choosing a passphrase, PIN or backup passphrase.",
+    "24-word recovery phrase: show your identity as 24 words to write on paper (Settings → Security), and restore from it on a new device. This encodes your Vexunori key directly; it is not the NIP-06 seed format of some other Nostr apps.",
     "Still experimental and untested on many real phones — please report bugs on GitHub."
   ]
 }

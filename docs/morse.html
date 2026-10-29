@@ -10,7 +10,7 @@
     <title>Morse · Vexunori</title>
     <link rel="icon" href="/vexunori/favicon.svg" type="image/svg+xml" />
     <script type="module" crossorigin src="/vexunori/assets/app-4_tHw1xm.js"></script>
-    <script type="module" crossorigin src="/vexunori/assets/site-BbUp1yna.js"></script>
+    <script type="module" crossorigin src="/vexunori/assets/site-Bl5Pi7cw.js"></script>
     <link rel="stylesheet" crossorigin href="/vexunori/assets/app-D4G53B2d.css">
     <link rel="stylesheet" crossorigin href="/vexunori/assets/site-CIUq-uRg.css">
   </head>
@@ -93,19 +93,48 @@
           <p>Insert Morse into a message from the chat composer or send from the Morse screen. Messages composed in Morse are marked with a Morse badge for the recipient. To make Morse that only your contact can read, use <a href="#secret-morse">Secret Morse</a>.</p>
 
           <h2 id="secret-morse">Secret Morse (automatic, with a contact)</h2>
-          <div class="banner"><p><strong>Secret Morse turns your message into a code made from your and your contact's private keys.</strong> A new code is created for every message. Only your two phones can decode it — not relays, not Vexunori's makers, nobody else. People who hear or see the Morse only get the code. Someone who unlocks your phone can read it, so keep the app locked. It is modern encryption (very strong), not a one-time pad.</p></div>
+          <div class="banner"><p><strong>Secret Morse turns your message into a code made from your and your contact's private keys.</strong> A new code is created for every message. Only your two phones can decode it — not relays, not Vexunori's makers, nobody else. People who hear or see the Morse only get the code. On your phone, decoded text stays hidden until you tap to reveal it (see <a href="#keeping-private">Keeping Secret Morse private on your phone</a>). It is modern encryption (very strong), not a one-time pad.</p></div>
           <p>There are no pads to share: the code comes from the keys you already have for each other, so it works as soon as you are contacts.</p>
           <ul>
-            <li><strong>In a one-to-one chat</strong>: tap the lock button next to the Morse button. While it is on, what you type is sent as a code, and drafts are not saved. Your contact's app decodes it automatically and shows the text with “🔒 Secret Morse · decoded on this phone”. “Show code” shows the groups and their Morse, and Play opens them in the Morse player. The decoded text is only kept on screen; the saved message keeps the code. In group chats the button is hidden: Secret Morse works in one-to-one chats only.</li>
+            <li><strong>In a one-to-one chat</strong>: tap the lock button next to the Morse button. While it is on, what you type is sent as a code, and drafts are not saved. Your contact sees “🔒 Secret Morse · Tap to reveal” and decodes it with their app passphrase or PIN (or automatically, if they turned Tap to reveal off). “Show code” shows the groups and their Morse, and Play opens them in the Morse player. The decoded text is only kept on screen; the saved message keeps the code. In group chats the button is hidden: Secret Morse works in one-to-one chats only.</li>
             <li><strong>By sound, light or radio</strong>: on the Morse screen, open <strong>Secret Morse</strong>, pick the contact, type the message and press Make code. Copy the groups or the Morse, or play them as sound, light or vibration. The other person picks you as the contact, pastes or taps in the groups (letters or Morse; spacing doesn't matter) and presses Decode.</li>
             <li><strong>What is kept</strong>: letters (accents removed), digits, spaces and <code>. , ? ! ' - /</code>. Other signs are left out and you are told which. Morse has no capitals, so messages arrive in capitals. Up to about 5,000 characters.</li>
             <li><strong>If decoding fails</strong> you see “Couldn't decode — not from this contact or damaged.” That means the wrong contact was picked, a group was copied wrongly, or someone changed it.</li>
           </ul>
           <details>
             <summary>How it works (technical)</summary>
-            <p>Both phones compute the same shared secret from your private key and the other person's public key (NIP-44 v2 conversation key: ECDH on secp256k1). Each message gets a fresh random 50-bit indicator, sent in the clear as the first two groups (letters and the digits 2–7). HKDF-SHA256 turns the shared secret and the indicator into two one-message keys. The text is mapped to the 36 symbols A–Z 0–9 (a space is <code>0</code>, a digit <var>d</var> is <code>1</code><var>d</var>, <code>. , ? ! ' - /</code> are <code>2</code>–<code>8</code>, and <code>9</code> fills the last group), and a ChaCha20 keystream, sampled without bias, is added mod 36. The last two groups are a check code (about 51 bits from HMAC-SHA256) that detects a wrong key or any change. Messages look like <code>[2 indicator groups] [message groups] [2 check groups]</code>; in a chat they start with <code>VXSM1</code>. All primitives come from the audited @noble libraries. The length of the message (in groups) is not hidden.</p>
+            <p>Both phones compute the same shared secret from your private key and the other person's public key (NIP-44 v2 conversation key: ECDH on secp256k1). Each message gets a fresh random 50-bit indicator, sent in the clear as the first two groups (letters and the digits 2–7). HKDF-SHA256 turns the shared secret and the indicator into two one-message keys. The text is mapped to the 36 symbols A–Z 0–9 (a space is <code>0</code>, a digit <var>d</var> is <code>1</code><var>d</var>, <code>. , ? ! ' - /</code> are <code>2</code>–<code>8</code>, and <code>9</code> fills the last group), and a ChaCha20 keystream, sampled without bias, is added mod 36. The last two groups are a check code (about 51 bits from HMAC-SHA256) that detects a wrong key or any change. Messages look like <code>[2 indicator groups] [message groups] [2 check groups]</code>; in a chat they start with <code>VXSM1</code>. With a secret phrase they start with <code>VXSM2</code>: the phrase is stretched with Argon2id (64 MiB, 3 passes; salt = SHA-256 of a fixed label and both public keys) and mixed into the HKDF input, so the keys need both the conversation key and the phrase. The phrase is never stored, and no check value is stored either, so nothing on the phone can be used to test guesses. Argon2id comes from hash-wasm; all other primitives come from the audited @noble libraries. The length of the message (in groups) is not hidden.</p>
           </details>
           <p>The manual one-time pad below is still available for when you want a key that does not depend on your phone's private key.</p>
+
+          <h2 id="keeping-private">Keeping Secret Morse private on your phone</h2>
+          <p>Secret Morse protects your messages on the way. These three options protect them on your phone, in case someone gets into the unlocked app. You can use all three.</p>
+          <h3>1. Tap to reveal (on by default)</h3>
+          <ul>
+            <li>Secret Morse messages show only “🔒 Secret Morse · Tap to reveal”. To read one, tap it and enter the passphrase or PIN you use to unlock Vexunori. In a hidden profile, that profile's own passphrase or PIN.</li>
+            <li>After that, other Secret Morse messages in the same chat open without asking for 2 minutes.</li>
+            <li>The text hides again after 30 seconds (you can choose 10 seconds, 30 seconds or 2 minutes in Morse → Settings), when you leave the chat, when you switch to another app and when the app locks. The decoded text is never saved; only the code is.</li>
+            <li>Wrong tries get the same growing wait as the lock screen.</li>
+            <li>You can turn it off for all chats (Morse → Settings) or for one chat (the chat's Info page). Turning it off asks for your passphrase or PIN too.</li>
+            <li><strong>No passphrase or PIN?</strong> (Android Keystore mode, or the web “no passphrase” mode.) Then revealing only asks you to confirm. That is only a privacy screen: anyone holding your unlocked phone can tap through it. Set a passphrase or PIN in Settings → Security for real protection.</li>
+            <li>Fingerprint unlock is not supported yet.</li>
+          </ul>
+          <h3>2. A secret phrase for one contact (strongest)</h3>
+          <ul>
+            <li>In a one-to-one chat, open Info and choose <strong>Add a secret phrase for Secret Morse</strong>. Agree on a phrase with your contact in person. It's never sent or saved. Without it, nobody can decode your Secret Morse — not even someone holding your unlocked phone. Your contact adds the same phrase in their app.</li>
+            <li>You type the phrase when you first reveal or send in that chat. The app keeps it in memory only until the app locks or has been in the background for 5 minutes, then wipes it.</li>
+            <li>The app keeps no copy and no check value, so it cannot tell you whether a phrase is right. A wrong phrase shows “Couldn't decode — wrong phrase or damaged”.</li>
+            <li>Use several words. A short phrase could be guessed by someone who has both your unlocked phone and the code, although each guess is made slow on purpose.</li>
+            <li>The Secret Morse tab on the Morse screen has a “Use a secret phrase” switch for codes you send by sound, light or radio.</li>
+            <li>Messages sent before you added a phrase still open without it.</li>
+          </ul>
+          <h3>3. Burn after reading</h3>
+          <ul>
+            <li>With Secret Morse on, the composer shows <strong>🔥 Burn after reading</strong>. A chat can have it on by default (Info page).</li>
+            <li>Your contact can reveal the message once. As soon as it is shown, the saved copy is deleted on their phone; when the text hides they see “Burned after reading”. Their app then tells your apps to delete your copy too.</li>
+            <li>You can't reveal your own burn message after sending; you see “Sent — burns after reading”.</li>
+            <li>Deleted from both apps after one reading. A modified app, a screenshot (blocked on Android) or another camera can still keep a copy.</li>
+          </ul>
 
           <h2 id="one-time-pad">One-time pad (WW2-style secret Morse)</h2>
           <div class="banner"><p><strong>A one-time pad is unbreakable only if the pad is truly random, used once, shared securely, and destroyed after use.</strong> Lose or reuse the pad and the protection is gone. In a chat, messages are also end-to-end encrypted; the pad mostly matters when you send Morse by sound, light or radio, where anyone can listen.</p></div>

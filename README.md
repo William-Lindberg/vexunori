@@ -44,7 +44,7 @@ There is no central Vexunori server. If one relay is down or blocks you, your me
 - **Sender hidden from relays.** Each message is wrapped in an extra envelope signed with a throw-away key, so relays can't see who sent it, and its timestamp is randomised.
 - **Every message is checked.** Your app verifies the signatures, so nobody can forge a message from one of your contacts.
 - **Verify your contacts.** Compare safety numbers (or scan each other's QR code) to be sure you're talking to the right person.
-- **Encrypted on your phone too.** Everything Vexunori stores on your device is encrypted with a key protected by your passphrase or PIN.
+- **Encrypted on your phone too.** Everything Vexunori stores on your device is encrypted with a key protected by your passphrase or PIN, using Argon2id so guessing it is slow and expensive.
 - **Hide your IP address (Android).** Turn on built-in Tor and your connection to the relays goes through Tor.
 
 **What it does not protect:**
@@ -77,6 +77,8 @@ Full details: [security page](https://william-lindberg.github.io/vexunori/securi
 | Move to a new device with history | 🧪 | ✅ | ✅ | ❌ |
 | Morse code tools (text, sound, light, vibration) | ✅ | ❌ | ❌ | ❌ |
 | Secret Morse (new code every message, only you two can decode) | ✅ 1:1 chats | ❌ | ❌ | ❌ |
+| Tap-to-reveal, secret phrase and burn-after-reading for Secret Morse | ✅ | ❌ | ❌ | ❌ |
+| 24-word recovery phrase | ✅ | ❌ | ❌ | ❌ |
 | One-time-pad Morse encryption | ✅ | ❌ | ❌ | ❌ |
 | VPN check in the app | 🧪 Android | ❌ | ❌ | ❌ |
 | Encrypted Vault | ✅ | ❌ | ◐ | ◐ |
@@ -97,7 +99,7 @@ Other apps change over time. This table reflects our understanding in October 20
 
 ## Good to know before you start
 
-- **Version 1.1.0, experimental.** Built and tested with automated tests and in browsers, but the Android app has not yet been tested on many real phones. Features marked 🧪 are the least proven.
+- **Version 1.2.0, experimental.** Built and tested with automated tests and in browsers, but the Android app has not yet been tested on many real phones. Features marked 🧪 are the least proven.
 - **Notifications** only arrive while Vexunori is running. There is no push service.
 - **The Private Browser is not Tor Browser.** It blocks many fingerprinting tricks, but the browser engine, fonts and TLS fingerprint can still identify it. For the strongest protection use the official Tor Browser.
 - **Some relays refuse Tor connections.** If a relay shows an error while Tor is on, your messages still go through the relays that work.

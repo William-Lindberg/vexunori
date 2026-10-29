@@ -10,7 +10,7 @@
     <title>Backup & recovery · Vexunori</title>
     <link rel="icon" href="/vexunori/favicon.svg" type="image/svg+xml" />
     <script type="module" crossorigin src="/vexunori/assets/app-4_tHw1xm.js"></script>
-    <script type="module" crossorigin src="/vexunori/assets/site-BbUp1yna.js"></script>
+    <script type="module" crossorigin src="/vexunori/assets/site-Bl5Pi7cw.js"></script>
     <link rel="stylesheet" crossorigin href="/vexunori/assets/app-D4G53B2d.css">
     <link rel="stylesheet" crossorigin href="/vexunori/assets/site-CIUq-uRg.css">
   </head>
@@ -68,7 +68,8 @@
           <h2 id="backup">Encrypted backups</h2>
           <p><strong>Settings → Backup &amp; recovery</strong> writes a <code>.vxbackup</code> file with <em>everything</em>: your secret key, contacts, messages, Vault and settings.</p>
           <ul>
-            <li>It is encrypted with AES-256-GCM under a <strong>backup passphrase</strong> you choose (separate from your app passphrase). Use a strong one and store it apart from the file.</li>
+            <li>It is encrypted with AES-256-GCM under a <strong>backup passphrase</strong> you choose (separate from your app passphrase). Use a strong one (the meter must show at least "Good") and store it apart from the file.</li>
+            <li>The key comes from the backup passphrase through <strong>Argon2id</strong> (64 MiB of memory, 3 passes), which makes guessing slow and expensive even with graphics cards. The settings are stored in the file. Backups made by older versions (PBKDF2) still verify and restore.</li>
             <li>Anyone with the file and the backup passphrase gets your whole identity.</li>
             <li>Use <strong>Verify a backup</strong> to check that a saved file opens with your backup passphrase.</li>
             <li>Restore on the welcome screen of a fresh install: <strong>Restore from backup</strong>. Restoring never merges into an existing profile.</li>
@@ -98,6 +99,9 @@
             <li><strong>A linked device cannot be removed later.</strong> The only way to cut it off is to create a new identity and give your contacts the new invite.</li>
           </ul>
 
+          <h2 id="recovery-phrase">Recovery phrase (24 words)</h2>
+          <p><strong>Settings → Security → Show recovery phrase</strong> shows your secret key as 24 words to write on paper. On a fresh install choose <strong>Restore from recovery phrase</strong> and type them. Like a recovery kit it restores the <strong>identity only</strong> (not messages or contacts), and anyone with the words can take over your identity. It is not a NIP-06 seed phrase for other Nostr apps; see <a href="/vexunori/docs/identity.html#recovery-phrase">Your identity</a>.</p>
+
           <h2 id="circle">Recovery kit (recovery circle)</h2>
           <p>In <strong>Settings → Backup &amp; recovery → Recovery kit</strong> you can split your secret key into <em>n</em> shares for people you trust, so that any <em>k</em> of them together can restore it (Shamir's Secret Sharing).</p>
           <ul>
@@ -110,7 +114,7 @@
 
           <h2 id="lost">If you lose…</h2>
           <dl>
-            <dt>…your passphrase</dt><dd>Your local data cannot be decrypted. Restore from a backup, a recovery kit or another linked device on a fresh install, or start over.</dd>
+            <dt>…your passphrase</dt><dd>Your local data cannot be decrypted. Restore from a backup, your 24-word recovery phrase, a recovery kit or another linked device on a fresh install, or start over.</dd>
             <dt>…your device</dt><dd>Restore a backup or link from another device. If the lost device had no passphrase (web device mode), whoever finds it can read your data; consider creating a new identity.</dd>
             <dt>…a backup passphrase</dt><dd>That backup is useless. Make a new backup.</dd>
             <dt>…a Space passphrase</dt><dd>Items in that protected Space cannot be recovered.</dd>

@@ -1,2 +1,0 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/web-CVM_CWKH.js","assets/dist-DGv5kf5b.js"])))=>i.map(i=>d[i]);
-import{a as e,s as t}from"./dist-DGv5kf5b.js";import{t as n}from"./preload-helper-C3bjuCW7.js";var r=t({Share:()=>i}),i=e(`Share`,{web:()=>n(()=>import(`./web-CVM_CWKH.js`).then(e=>new e.ShareWeb),__vite__mapDeps([0,1]))});export{r as n,i as t};
