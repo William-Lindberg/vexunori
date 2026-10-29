@@ -11,7 +11,6 @@ Chat with friends, family or a team, keep your own notes and files locked away, 
 
 > ⚠️ **Vexunori is experimental.** It is new, has not had an independent security audit, and the Android app has not yet been tested on many real phones. You will probably run into bugs.
 > **Please report them:** [open an issue](https://github.com/William-Lindberg/vexunori/issues/new) and say what you did, what happened, your phone or browser, and the Vexunori version (Settings → About). Never include your secret key, passphrase or private messages in a report.
-> Don't rely on Vexunori alone for anything where your safety depends on it.
 
 ---
 
