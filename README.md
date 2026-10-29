@@ -60,9 +60,7 @@ Read the [security page](https://william-lindberg.github.io/vexunori/security.ht
 | Privacy Center with health check | ✅ | ❌ | ❌ | ❌ |
 | Works in a web browser | ✅ | ❌ | ❌ | ❌ |
 | Android app | ✅ APK | ✅ | ✅ | ✅ |
-| Open source | ❌ | ✅ | ✅ | ✅ |
 | Run your own server | ◐ any Nostr relay | ❌ | ✅ | ◐ |
-| No AI features | ✅ | ✅ | ✅ | ✅ |
 
 Other apps change over time. This table reflects our understanding in October 2026; check each project's own site for the latest.
 
