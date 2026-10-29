@@ -1,14 +1,14 @@
 {
-  "version": "1.0.1",
-  "versionCode": 10001,
-  "buildDate": "2026-10-29T15:49:32.125Z",
-  "file": "vexunori-1.0.1.apk",
+  "version": "1.0.2",
+  "versionCode": 10002,
+  "buildDate": "2026-10-29T16:10:26.692Z",
+  "file": "vexunori-1.0.2.apk",
   "size": 13660566,
-  "sha256": "0df523b1a3ddec13f34d8a5093c155bbd6a26d0e179795c36b4265ccf122d0ea",
+  "sha256": "f9e8b70569394391f3bcc153a9039213b82d2ccb6603e2ff3d06a3973b81f89e",
   "minAndroid": "7.0",
   "signingCertSha256": "b96be6c7d263d56bd40b8479d02f94db6f848dae99f5ae6523b19b4b1087433b",
   "notes": [
-    "The Private Browser is now in the bottom bar on phones (and in More). Before, it only appeared in the desktop sidebar.",
-    "Relays: when you connect through Tor and a relay refuses, Settings → Relays now explains that some relays block Tor connections and that your messages still go through the relays that work."
+    "Vexunori is experimental: the app (Welcome screen, Settings → About), the website and the README now say so clearly and ask you to report bugs, with a \"Report a problem\" button.",
+    "The README explains in plain words how messages travel through relays and how they are secured, and the comparison table now lists the newer features."
   ]
 }

@@ -9,55 +9,83 @@ Chat with friends, family or a team, keep your own notes and files locked away, 
 👉 **Get the Android app:** [Download the APK](https://github.com/William-Lindberg/vexunori/releases/latest) (not on Google Play)
 👉 **Website:** https://william-lindberg.github.io/vexunori/
 
+> ⚠️ **Vexunori is experimental.** It is new, has not had an independent security audit, and the Android app has not yet been tested on many real phones. You will probably run into bugs.
+> **Please report them:** [open an issue](https://github.com/William-Lindberg/vexunori/issues/new) and say what you did, what happened, your phone or browser, and the Vexunori version (Settings → About). Never include your secret key, passphrase or private messages in a report.
+> Don't rely on Vexunori alone for anything where your safety depends on it.
+
 ---
 
 ## What you can do with it
 
-- **Chat privately.** One-to-one and group chats, encrypted on your device before they are sent. Replies, reactions, editing, deleting, photos and files, and messages that disappear after a set time.
-- **No phone number, no account.** Your identity is a key created on your own device. You add people by sharing an invite link or QR code.
-- **Work together in groups.** Every group has a shared space for tasks, to-do lists, polls, notes, events and links, right next to the chat.
-- **Keep things private in the Vault.** An encrypted place on your device for notes, links, photos and documents. Sort them into Spaces such as *Personal*, *Research* and *Sensitive*.
+- **Chat privately.** One-to-one and group chats, encrypted on your device before they are sent. Replies, reactions, editing, deleting, photos, files and stickers, messages that disappear after a set time, view-once photos, and messages you schedule for later.
+- **No phone number, no account.** Your identity is a key created on your own device. You add people with an invite link or QR code, and invite them to groups with a group link.
+- **Work together in groups.** Every group has a shared space for tasks, to-do lists, polls, events, links and notes you can edit together.
+- **Keep things private in the Vault.** An encrypted place on your device for notes, links, photos and documents, sorted into Spaces such as *Personal*, *Research* and *Sensitive*.
 - **Check before you share.** SendGuard shows hidden information in a file (like the GPS location in a photo) and can remove it. Links are checked before they open.
-- **See what happened.** The Privacy Center shows your privacy settings in plain words and keeps a private log on your device of what you shared or exported.
-- **Use Morse code.** Translate text and Morse, tap out messages, and play them as sound, light or vibration.
-- **Stay in touch without internet.** Hand over messages by QR code or as a file (for example over Bluetooth with Android's share menu), or through a relay on your local Wi-Fi.
-- **Lock it fast.** A passphrase lock, auto-lock, and an Emergency Freeze button.
+- **Browse privately (Android).** A built-in Private Browser that goes through Tor, with protection against tracking by device fingerprint.
+- **Hide it if you need to.** A hidden second profile behind its own PIN, a disguised app icon (for example a calculator), shake-to-lock and an Emergency Freeze button.
+- **Use Morse code.** Translate, tap out and play Morse as sound, light or vibration — including WW2-style one-time-pad encryption for Morse sent out loud.
+- **Stay in touch without internet.** Hand over messages by QR code or as a file, or through a relay on your local Wi-Fi.
 
-No ads, no trackers, no AI features.
+No ads and no trackers.
 
-## How private is it?
+## How your messages travel
 
-- Messages are end-to-end encrypted using the open Nostr NIP-17 standard. The relays that carry them cannot read them or see who sent them.
-- Relays can still see *who receives* a message, when, and how big it is, plus your IP address. Using Tor (experimental, built into the Android app — no Orbot needed) hides your IP address.
-- Your data on the phone is encrypted. With a strong passphrase, it stays unreadable while the app is locked.
-- There is no forward secrecy yet, and Vexunori has **not** had an independent security audit.
+1. You write a message. **Your phone encrypts it** for the person (or each group member) before it leaves the device.
+2. The encrypted message is sent to a few **relays**. Relays are simple, free servers run by different people and communities around the world (Vexunori uses nos.lol, relay.primal.net, offchain.pub and nostr.mom by default, and you can add your own). They store and pass on messages; they cannot read them.
+3. **The recipient's app fetches it** from those relays and decrypts it on their phone. If they are offline, the relays keep it until they come back.
+4. Your app shows honest status: *sent to relays* (a relay accepted it), *delivered* (their device confirmed it), *read* (only if they turned read receipts on).
 
-Read the [security page](https://william-lindberg.github.io/vexunori/security.html) for the full details.
+There is no central Vexunori server. If one relay is down or blocks you, your messages go through the others. Without internet you can pass messages phone-to-phone with a QR code or a file.
+
+## How your messages are secured
+
+- **End-to-end encryption.** Messages use the open, published Nostr standard NIP-17 (NIP-44 encryption with "gift wrapping"). Only the people in the chat can read them — not the relays, not your internet provider, not us.
+- **Sender hidden from relays.** Each message is wrapped in an extra envelope signed with a throw-away key, so relays can't see who sent it, and its timestamp is randomised.
+- **Every message is checked.** Your app verifies the signatures, so nobody can forge a message from one of your contacts.
+- **Verify your contacts.** Compare safety numbers (or scan each other's QR code) to be sure you're talking to the right person.
+- **Encrypted on your phone too.** Everything Vexunori stores on your device is encrypted with a key protected by your passphrase or PIN.
+- **Hide your IP address (Android).** Turn on built-in Tor and your connection to the relays goes through Tor.
+
+**What it does not protect:**
+- Relays can see *which key* receives a message, when, and its size, plus your IP address unless you use Tor.
+- No forward secrecy yet: if someone steals your secret key, old messages still stored on relays could be decrypted.
+- A message is only as safe as the phones at both ends.
+- No independent security audit has been done.
+
+Full details: [security page](https://william-lindberg.github.io/vexunori/security.html).
 
 ## How it compares
 
-✅ available · 🧪 experimental · ◐ partly · ❌ not available
+✅ available · 🧪 experimental (built, not yet proven on real phones) · ◐ partly · ❌ not available
 
 | Feature | **Vexunori** | Signal | SimpleX Chat | Briar |
 |---|:---:|:---:|:---:|:---:|
 | End-to-end encrypted messaging | ✅ | ✅ | ✅ | ✅ |
 | Group messaging | ✅ | ✅ | ✅ | ◐ |
-| Voice and video calls | 🧪 1:1 only | ✅ | ✅ | ❌ |
+| Group invite links and QR codes | ✅ | ✅ | ✅ | ❌ |
 | Disappearing messages | ✅ | ✅ | ✅ | ◐ 1:1 only |
-| Tor connectivity | ✅ built in (Android) | ❌ | ✅ | ✅ |
-| Built-in private browser over Tor (anti-fingerprinting) | ✅ Android | ❌ | ❌ | ❌ |
+| View-once photos | 🧪 | ✅ | ❌ | ❌ |
+| Scheduled messages and reminders | ◐ while app runs | ❌ | ❌ | ❌ |
+| Voice and video calls | 🧪 1:1 only | ✅ | ✅ | ❌ |
+| Tor connectivity | 🧪 built in (Android) | ❌ | ✅ | ✅ |
+| Built-in private browser over Tor (anti-fingerprinting) | 🧪 Android | ❌ | ❌ | ❌ |
+| Hidden second profile | ✅ | ❌ | ✅ | ❌ |
+| Disguised app icon | 🧪 Android | ❌ | ❌ | ❌ |
 | Offline messaging over Bluetooth | ◐ via file sharing | ❌ | ❌ | ✅ |
 | Local Wi-Fi communication | 🧪 local relay | ❌ | ❌ | ✅ |
+| Move to a new device with history | 🧪 | ✅ | ✅ | ❌ |
 | Morse code tools (text, sound, light, vibration) | ✅ | ❌ | ❌ | ❌ |
+| One-time-pad Morse encryption | ✅ | ❌ | ❌ | ❌ |
 | Encrypted Vault | ✅ | ❌ | ◐ | ◐ |
-| Private notes and saved links | ✅ | ◐ | ◐ | ◐ |
 | File metadata check before sharing | ✅ | ◐ photos | ❌ | ❌ |
 | Link check before opening | ✅ | ❌ | ❌ | ❌ |
 | Privacy log of shares and exports | ✅ | ❌ | ❌ | ❌ |
 | Spaces (Personal, Research, Sensitive) | ✅ | ❌ | ❌ | ❌ |
 | Privacy Bridge and Passports | ✅ | ❌ | ❌ | ❌ |
 | Group tasks and to-do lists | ✅ | ❌ | ❌ | ❌ |
-| Shared notes, polls and events | ✅ | ◐ polls | ❌ | ◐ |
+| Notes you edit together | ✅ | ❌ | ❌ | ❌ |
+| Polls and events | ✅ | ◐ polls | ❌ | ◐ |
 | Privacy Center with health check | ✅ | ❌ | ❌ | ❌ |
 | Works in a web browser | ✅ | ❌ | ❌ | ❌ |
 | Android app | ✅ APK | ✅ | ✅ | ✅ |
@@ -67,11 +95,22 @@ Other apps change over time. This table reflects our understanding in October 20
 
 ## Good to know before you start
 
-- **Version 0.1.0.** The Android app has been built and checked, but not yet tested on many real phones.
+- **Version 1.0.1, experimental.** Built and tested with automated tests and in browsers, but the Android app has not yet been tested on many real phones. Features marked 🧪 are the least proven.
 - **Notifications** only arrive while Vexunori is running. There is no push service.
-- **Calls, Tor, the Private Browser and local Wi-Fi** are experimental. Built-in Tor and the Private Browser have not yet been tested on a real device. The Private Browser is not Tor Browser: it blocks many fingerprinting tricks, but the WebView engine, fonts and TLS fingerprint can still identify it — for the strongest protection use the official Tor Browser. Calls are off by default because they show your IP address to the other person.
+- **The Private Browser is not Tor Browser.** It blocks many fingerprinting tricks, but the browser engine, fonts and TLS fingerprint can still identify it. For the strongest protection use the official Tor Browser.
+- **Some relays refuse Tor connections.** If a relay shows an error while Tor is on, your messages still go through the relays that work.
+- **Calls are off by default** because they show your IP address to the other person.
 - **Add people with an invite link.** Contacts added by key only may not receive your messages.
 - **Back up.** If you lose your phone and your passphrase without a backup, your identity and messages cannot be recovered.
+
+## Report a problem
+
+Found a bug or something confusing? [Open an issue](https://github.com/William-Lindberg/vexunori/issues/new). Please include:
+- what you did and what happened (screenshots help — but blur anything private),
+- your phone model and Android version, or your browser,
+- the Vexunori version (Settings → About).
+
+Never post your secret key (nsec), passphrase, PIN, recovery shares or private messages.
 
 ## Licence
 
