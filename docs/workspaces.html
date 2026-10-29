@@ -10,7 +10,7 @@
     <title>Group workspaces · Vexunori</title>
     <link rel="icon" href="/vexunori/favicon.svg" type="image/svg+xml" />
     <script type="module" crossorigin src="/vexunori/assets/app-4_tHw1xm.js"></script>
-    <script type="module" crossorigin src="/vexunori/assets/site-CyJ87sLJ.js"></script>
+    <script type="module" crossorigin src="/vexunori/assets/site-Dp17vPLm.js"></script>
     <link rel="stylesheet" crossorigin href="/vexunori/assets/app-D4G53B2d.css">
     <link rel="stylesheet" crossorigin href="/vexunori/assets/site-CIUq-uRg.css">
   </head>
@@ -74,10 +74,23 @@
             <li>Only <strong>current group members</strong> can change the workspace. Items can be deleted by their creator or an admin. Only they can also close or reopen a poll, change a poll's question, or change a saved link's address.</li>
           </ul>
 
+          <h2 id="notes">Notes you edit together</h2>
+          <p>Everyone in the group can open a note and write in it at the same time. Changes made at the same time are merged, character by character, so nobody's typing is lost and there is no "conflict copy".</p>
+          <ul>
+            <li><strong>Formatting:</strong> start a line with <code>#</code> for a heading, wrap words in <code>**bold**</code> or <code>*italic*</code>, start a line with <code>- </code> for a list and <code>- [ ] </code> for a checklist item. The toolbar buttons (B, I, H, list, checklist) add these marks for you, and Ctrl+B / Ctrl+I work too. Pressing Enter in a list continues it.</li>
+            <li><strong>Checklists:</strong> in the note's view, tick a box to mark the item done (<code>- [x]</code>). Everyone sees the tick.</li>
+            <li><strong>While you type</strong>, your changes are collected and sent to the group about once a second. Other members see them when their app receives them; this is not a live keystroke stream.</li>
+            <li><strong>Status:</strong> under the title you see "Saved on this device, not sent yet", "Sent, not yet accepted by a relay" or "Sent, accepted by a relay" for your own changes, and who else edited the note recently. "Accepted by a relay" does not prove that every member has the change yet.</li>
+            <li><strong>Missing changes:</strong> when you open a note, your app asks the other members for anything of that note it has not received (at most every 10 minutes). Members answer with only the missing part.</li>
+            <li><strong>Size:</strong> a note can hold up to 100 000 characters. Big changes are split into several encrypted messages.</li>
+            <li><strong>Older notes</strong> (made before shared editing) are converted the first time someone opens them. A note that had two conflicting versions can still be resolved the old way, or opened for shared editing, which keeps both versions in the text under "--- Version" lines.</li>
+            <li>Any member can change or remove any text in a note. Each change is signed, so the app knows who made it, but it does not show who wrote which word.</li>
+          </ul>
+
           <h2 id="conflicts">Conflicts</h2>
           <ul>
             <li>Two people change the same field (for example a task title) at the same time: every app picks the same winner (the later change by a hybrid logical clock) and the other value is replaced. That is a deliberate trade-off for short fields; the clock order is not always real-time order when device clocks disagree.</li>
-            <li>Two people edit the same <strong>note</strong> at the same time: both versions are kept and the note is marked as having a conflict until someone resolves it. Nothing is silently dropped.</li>
+            <li>Two people edit the same <strong>note</strong> at the same time: both changes are merged into the text (see above). Only notes from older app versions can still show a conflict.</li>
             <li>Poll votes: each person has one vote per poll; their latest one counts.</li>
             <li>To-do entries added at the same time are both kept.</li>
           </ul>
@@ -88,6 +101,7 @@
             <li>A device with a wrong clock can win conflicts it should lose (clocks too far in the future are rejected).</li>
             <li>File items in the workspace reference files sent through chat (same 1.5 MB limit).</li>
             <li>Personal reminders fire only while Vexunori is open and unlocked; one that falls due while the app is closed shows as missed after you unlock. On Android they are also scheduled as local notifications that can fire while the app is closed, possibly a few minutes late. With the "Full" notification preview, the reminder text is handed to Android and stored there unencrypted until it fires.</li>
+            <li>Note changes from someone still using an older app version are not merged into a note that has been opened for shared editing.</li>
             <li>The workspace history is never compacted: every change is kept on each member's device, so it grows over time.</li>
             <li>Workspace changes are signed so they can be passed on to late joiners. A member who leaks one can prove you wrote it, unlike chat messages.</li>
           </ul>

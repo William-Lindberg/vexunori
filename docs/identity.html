@@ -10,7 +10,7 @@
     <title>Your identity · Vexunori</title>
     <link rel="icon" href="/vexunori/favicon.svg" type="image/svg+xml" />
     <script type="module" crossorigin src="/vexunori/assets/app-4_tHw1xm.js"></script>
-    <script type="module" crossorigin src="/vexunori/assets/site-CyJ87sLJ.js"></script>
+    <script type="module" crossorigin src="/vexunori/assets/site-Dp17vPLm.js"></script>
     <link rel="stylesheet" crossorigin href="/vexunori/assets/app-D4G53B2d.css">
     <link rel="stylesheet" crossorigin href="/vexunori/assets/site-CIUq-uRg.css">
   </head>
@@ -79,12 +79,25 @@
             <thead><tr><th scope="col">Mode</th><th scope="col">How the data key is protected</th><th scope="col">Protects against</th><th scope="col">Does not protect against</th></tr></thead>
             <tbody>
               <tr><th scope="row">Passphrase</th><td>Wrapped by a key derived from your passphrase (PBKDF2-SHA256, 600 000 iterations).</td><td>Someone copying your data or using your device while Vexunori is locked.</td><td>A weak passphrase; someone watching you type; malware.</td></tr>
+              <tr><th scope="row">PIN (6+ digits)</th><td>Same as a passphrase: PBKDF2-SHA256, 600 000 iterations.</td><td>Someone using your device while Vexunori is locked (the app slows down repeated guesses).</td><td>Someone who copies the app data: a 6-digit PIN has only a million options and can be guessed offline on a fast computer.</td></tr>
+              <tr><th scope="row">PIN + Android Keystore</th><td>Wrapped by the PIN-derived key, then again by a non-exportable Android Keystore key.</td><td>Copying the app's files off the phone (the PIN cannot be guessed offline without this phone's Keystore).</td><td>Someone who can try PINs on your phone itself (slowed by the delay). If the Keystore key is lost, the data cannot be opened.</td></tr>
               <tr><th scope="row">Android Keystore</th><td>Wrapped by a non-exportable key in the Android Keystore.</td><td>Copying the app's files off the phone.</td><td>Someone who can unlock and use your phone.</td></tr>
               <tr><th scope="row">No passphrase (web)</th><td>Stored next to the data.</td><td>Nothing at rest.</td><td>Anyone with access to the browser profile.</td></tr>
             </tbody>
           </table></div>
-          <p>You can change mode and passphrase in <strong>Settings → Security</strong>. After several wrong passphrases the app makes you wait before trying again.</p>
+          <p>You can change mode, passphrase or PIN in <strong>Settings → Security</strong>. After several wrong attempts the app makes you wait before trying again (on the lock screen and the frozen screen). This delay only slows guessing inside the app; it does not slow someone who copied the data.</p>
           <p><strong>Auto-lock</strong> (default 15 minutes) locks the app when it is in the background or idle. <strong>Emergency Freeze</strong> in the Privacy Center locks immediately, drops keys from memory and closes connections; you need your passphrase (or an explicit "Unfreeze") to continue. It does not delete anything and cannot reach other devices.</p>
+
+          <h2 id="hidden">Hidden profile</h2>
+          <p>A hidden profile is a second, separate profile on the same device with its own passphrase or PIN. Create it in <strong>Settings → Security → Hidden profile</strong>. Your normal profile needs a passphrase or PIN first, and the hidden one must use a different secret of the same kind, so the lock screen looks the same.</p>
+          <ul>
+            <li>The lock screen has one field. Your normal secret opens your normal profile; the hidden secret opens the hidden one. The normal profile never lists the hidden one.</li>
+            <li>The hidden profile has its <strong>own identity</strong> (a new key pair), contacts, chats, Vault and settings. Add its contacts from inside the hidden profile; it shares nothing with your normal profile. Its settings start as a copy of the normal profile's settings (relays, Tor and so on).</li>
+            <li>Only the open profile runs: the hidden profile connects to relays and shows notifications <strong>only while it is open</strong>. To switch, lock Vexunori and type the other secret.</li>
+            <li>Unlocking always does the same amount of work whether or not a hidden profile exists (a decoy key derivation when there is none), so timing does not give it away. Each extra hidden profile adds one more key derivation.</li>
+            <li>To remove it, open it and use <strong>Delete this hidden profile</strong>. "Delete everything" removes every profile.</li>
+          </ul>
+          <p><strong>What it does not do:</strong> it is not undetectable. Anyone who examines the device's storage can see that a second encrypted database exists (but cannot read it without the secret). It helps against someone looking over your shoulder or making you unlock the app, not against forensic analysis of the device. Workspace reminders already scheduled as Android notifications may still appear while the other profile is open.</p>
 
           <h2 id="export">Export and import</h2>
           <ul>

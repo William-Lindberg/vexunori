@@ -10,7 +10,7 @@
     <title>Groups · Vexunori</title>
     <link rel="icon" href="/vexunori/favicon.svg" type="image/svg+xml" />
     <script type="module" crossorigin src="/vexunori/assets/app-4_tHw1xm.js"></script>
-    <script type="module" crossorigin src="/vexunori/assets/site-CyJ87sLJ.js"></script>
+    <script type="module" crossorigin src="/vexunori/assets/site-Dp17vPLm.js"></script>
     <link rel="stylesheet" crossorigin href="/vexunori/assets/app-D4G53B2d.css">
     <link rel="stylesheet" crossorigin href="/vexunori/assets/site-CIUq-uRg.css">
   </head>
@@ -72,6 +72,16 @@
           <ul>
             <li>Up to <strong>100 members</strong>. We recommend <strong>50 or fewer</strong>.</li>
             <li>Because every message is encrypted and uploaded once per member, a message to 50 people means 50 uploads. Large groups are slower, use more data and battery, and hit relay rate limits sooner — especially with attachments.</li>
+          </ul>
+
+          <h2 id="invite-links">Invite links and QR codes</h2>
+          <ul>
+            <li>Admins can create an invite link in the group's <strong>Info</strong> tab, with an expiry (1 hour to 30 days, or never) and a limit on how many people can join with it. Each link is also shown as a QR code.</li>
+            <li>The link contains the group id and name, a random secret, and the inviting admin's public key and relays. It <strong>never contains the member list</strong>. The secret is in the part of the link after <code>#</code>, which browsers do not send to the web server.</li>
+            <li>Someone who opens the link (or scans the code in <strong>Contacts → Add contact → Scan group QR</strong>) sees a preview and taps <strong>Join</strong>. Their app sends an encrypted join request with the secret, their public key, display name and relays to the admin.</li>
+            <li>The admin's app checks the secret, expiry, number of uses and whether the link was revoked, then adds the person like any other new member. <strong>This only happens while the admin's app is running</strong>, so the joiner sees “Waiting for an admin's app to approve; this happens the next time an admin is online.”</li>
+            <li>Only the device that created the link can approve it. If the link is invalid, nothing is sent back: the joiner keeps waiting and should ask for a new link.</li>
+            <li>Anyone who gets hold of a valid link can join. Use short expiries and limits, and revoke links you no longer need.</li>
           </ul>
 
           <h2 id="admins">Admins</h2>

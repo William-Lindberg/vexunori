@@ -10,7 +10,7 @@
     <title>Backup & recovery · Vexunori</title>
     <link rel="icon" href="/vexunori/favicon.svg" type="image/svg+xml" />
     <script type="module" crossorigin src="/vexunori/assets/app-4_tHw1xm.js"></script>
-    <script type="module" crossorigin src="/vexunori/assets/site-CyJ87sLJ.js"></script>
+    <script type="module" crossorigin src="/vexunori/assets/site-Dp17vPLm.js"></script>
     <link rel="stylesheet" crossorigin href="/vexunori/assets/app-D4G53B2d.css">
     <link rel="stylesheet" crossorigin href="/vexunori/assets/site-CIUq-uRg.css">
   </head>
@@ -79,6 +79,24 @@
           <h2 id="link">Linking another device</h2>
           <p>On the device you already use, open <strong>Settings → Security → Link another device</strong>. It shows a QR code and a one-time code. On the new device choose <strong>Link this device / import a key</strong> on the welcome screen, scan the QR and type the code. The QR contains your secret key encrypted with the one-time code, so a photo of the QR alone is not enough.</p>
           <p>Both devices then share one identity. Each sent message is also sent to yourself, so both see the conversation going forward, plus whatever older messages your relays still keep. Contacts and settings are not synced automatically; use a backup to copy everything.</p>
+
+          <h2 id="link-history">Link a device with all your history</h2>
+          <p>To move <em>everything</em> (identity, contacts, chats, Vault, settings) to a new phone or computer without a backup file:</p>
+          <ol>
+            <li>On the new device choose <strong>Link this device</strong> on the welcome screen. It shows a QR code. The code holds only a one-time public key and the relay addresses, no secrets.</li>
+            <li>On the device you already use, open <strong>Settings → Backup &amp; recovery → Move everything to a new device without a file</strong> (or <strong>Settings → Security → Link another device</strong>), confirm with your passphrase and scan the QR code.</li>
+            <li>Both screens show six words. Check they are exactly the same and confirm on both devices. If any word differs, stop: someone may have swapped the QR code.</li>
+            <li>The old device sends the data; the new device shows the progress, checks the SHA-256 checksum, and asks how to protect this device (passphrase, Android Keystore or no passphrase). Then it is ready.</li>
+          </ol>
+          <ul>
+            <li>The data is the same as in a backup file. It is encrypted with AES-256-GCM under a key from the two one-time keys (ECDH, via the NIP-44 conversation key and HKDF), split into parts, and each part is sent as a NIP-59 gift wrap to the new device's one-time key.</li>
+            <li>The parts go through relays. They are marked to expire after 1 hour (NIP-40), but a relay may keep them longer. Without the new device's one-time key they cannot be decrypted, and that key is deleted when the transfer ends.</li>
+            <li>Parts that get lost are requested again automatically. If nothing arrives for a while the transfer stops; start again on both devices.</li>
+            <li>Sending is paced (about 10 parts of 16 KB per second) to stay within relay limits. Above about 50 MB the app warns you: a backup file is faster for that much data.</li>
+            <li>Under <em>Use a specific relay</em> on the new device you can pick a relay on your home network (for example <code>ws://192.168.1.10:7777</code>) so the data never leaves your network. The old device must allow LAN relays (Nearby → LAN relay).</li>
+            <li>Afterwards both devices use the same identity and both receive new messages, because every message you send is also sent to yourself. The devices do not keep syncing other changes.</li>
+            <li><strong>A linked device cannot be removed later.</strong> The only way to cut it off is to create a new identity and give your contacts the new invite.</li>
+          </ul>
 
           <h2 id="circle">Recovery kit (recovery circle)</h2>
           <p>In <strong>Settings → Backup &amp; recovery → Recovery kit</strong> you can split your secret key into <em>n</em> shares for people you trust, so that any <em>k</em> of them together can restore it (Shamir's Secret Sharing).</p>

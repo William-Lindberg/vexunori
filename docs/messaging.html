@@ -10,7 +10,7 @@
     <title>Messaging · Vexunori</title>
     <link rel="icon" href="/vexunori/favicon.svg" type="image/svg+xml" />
     <script type="module" crossorigin src="/vexunori/assets/app-4_tHw1xm.js"></script>
-    <script type="module" crossorigin src="/vexunori/assets/site-CyJ87sLJ.js"></script>
+    <script type="module" crossorigin src="/vexunori/assets/site-Dp17vPLm.js"></script>
     <link rel="stylesheet" crossorigin href="/vexunori/assets/app-D4G53B2d.css">
     <link rel="stylesheet" crossorigin href="/vexunori/assets/site-CIUq-uRg.css">
   </head>
@@ -106,6 +106,41 @@
           <h2 id="more">Replies, reactions, search, pins</h2>
           <p>Reply to a message to quote it; react with an emoji (reactions are encrypted like messages). Pin important messages in a conversation, bookmark messages for yourself, and keep drafts. <strong>Search</strong> runs only on your device over the messages it has decrypted; nothing is sent to a server. Search ignores letter case and accents.</p>
           <p>Typing indicators are not implemented: the other person cannot see when you are typing, and you cannot see when they are.</p>
+
+          <h2 id="send-later">Send later (scheduled messages)</h2>
+          <ul>
+            <li>Type a message and tap the <strong>clock</strong> button next to Send to pick a date and time.</li>
+            <li>The message is stored encrypted <strong>on this device only</strong>. It is not handed to a server or relay to send later.</li>
+            <li><strong>It sends at that time only if Vexunori is open or running; otherwise as soon as you open it.</strong> Your other devices do not send it.</li>
+            <li>A bar above the composer shows how many messages are scheduled. Open it to edit the text or time, cancel, or send now. If sending fails (for example because you left the group), the message stays in the list with the reason.</li>
+            <li>Scheduled messages can contain text only, not files.</li>
+          </ul>
+
+          <h2 id="reminders">Reminders</h2>
+          <ul>
+            <li>In a message's menu choose <strong>Remind me</strong>: in 1 hour, tonight at 20:00, tomorrow at 9:00, or a custom time.</li>
+            <li><strong>Android</strong>: the reminder is handed to the system as a local notification, so it appears even when Vexunori is closed (as long as notifications are allowed).</li>
+            <li><strong>Web</strong>: a browser cannot schedule notifications. The reminder appears while Vexunori is open in a tab; if it was closed at that time, it appears as soon as you open Vexunori again.</li>
+            <li>The notification text follows your <strong>notification preview</strong> setting: the message text is only shown when the preview is set to show everything.</li>
+            <li>Reminders are stored encrypted on this device and listed in the conversation's <strong>Info</strong> tab, where you can cancel them.</li>
+          </ul>
+
+          <h2 id="view-once">View-once photos</h2>
+          <ul>
+            <li>After attaching photos, switch on <strong>View once</strong> before sending. The recipient sees “Photo — view once” and can open it one time in a full-screen viewer. When they close it, the photo and its caption are deleted from their device and only an “Opened” marker stays.</li>
+            <li>By default your own device does not keep a viewable copy after sending (the encrypted copy for the recipient is already queued). Turn on <strong>Keep my copy</strong> if you want to keep it. Your other devices never keep a copy.</li>
+            <li>While the photo is open on <strong>Android</strong>, screenshots and screen recording of the app are blocked. <strong>In a browser, screenshots can't be blocked.</strong></li>
+            <li>This depends on the recipient's app playing along: <strong>another camera or a modified app can still capture the photo</strong>. Only send it to people you trust with it.</li>
+          </ul>
+
+          <h2 id="stickers">Stickers and chat themes</h2>
+          <ul>
+            <li>Vexunori has three built-in sticker packs drawn for the app: <strong>Faces</strong>, <strong>Morse</strong> badges (SOS, OK, 73 …) and <strong>Reactions</strong>. A sticker is sent as a normal encrypted image (a 512 px PNG), so the other person sees it without having the pack.</li>
+            <li><strong>Make a sticker</strong> from a photo: choose the square part, optionally round the corners or cut a circle, and save it as PNG or WebP (512 px). It is a new image, so the photo's metadata, such as location, is not kept.</li>
+            <li>You can add your own <strong>GIF or animated WebP</strong> files (up to 1.5 MB, the attachment limit). They are sent unchanged, including any metadata inside the file.</li>
+            <li>Your own stickers are stored encrypted on your device and are included in full backups. There is no sticker store and no GIF search, so nothing is looked up online.</li>
+            <li><strong>Chat themes</strong> (Settings → Appearance): accent colour, chat background pattern, rounded or square bubbles, and message text size. Colours are checked for readable contrast in light and dark mode. A conversation can also have its own accent colour. These settings are stored encrypted, so the lock screen uses the default look.</li>
+          </ul>
 
           <h2 id="relays">Relays and delivery</h2>
           <p>Your messages go to the recipient's inbox relays (from their invite) and a copy to your own relays so your other devices see them. Vexunori does not look up published relay lists (NIP-17 kind 10050): for a contact added by npub only, it sends to your own relays, which they may not read. By default Vexunori uses four public community relays. They are run by volunteers, are free, have no service guarantee and may change their rules. You can change relays in <strong>Settings → Relays</strong> or <a href="/vexunori/docs/self-hosting.html">run your own</a>.</p>

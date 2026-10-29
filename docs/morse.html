@@ -10,7 +10,7 @@
     <title>Morse · Vexunori</title>
     <link rel="icon" href="/vexunori/favicon.svg" type="image/svg+xml" />
     <script type="module" crossorigin src="/vexunori/assets/app-4_tHw1xm.js"></script>
-    <script type="module" crossorigin src="/vexunori/assets/site-CyJ87sLJ.js"></script>
+    <script type="module" crossorigin src="/vexunori/assets/site-Dp17vPLm.js"></script>
     <link rel="stylesheet" crossorigin href="/vexunori/assets/app-D4G53B2d.css">
     <link rel="stylesheet" crossorigin href="/vexunori/assets/site-CIUq-uRg.css">
   </head>
@@ -91,6 +91,20 @@
 
           <h2 id="chat">Morse in chats</h2>
           <p>Insert Morse into a message from the chat composer or send from the Morse screen. Messages composed in Morse are marked with a Morse badge for the recipient.</p>
+
+          <h2 id="one-time-pad">One-time pad (WW2-style secret Morse)</h2>
+          <div class="banner"><p><strong>A one-time pad is unbreakable only if the pad is truly random, used once, shared securely, and destroyed after use.</strong> Lose or reuse the pad and the protection is gone. In a chat, messages are also end-to-end encrypted; the pad mostly matters when you send Morse by sound, light or radio, where anyone can listen.</p></div>
+          <p>In the Second World War, Morse itself was never secret. SOE agents, resistance groups and Soviet spies enciphered their text with a <strong>one-time pad</strong> first and keyed out only the cipher. Machine ciphers such as Enigma were broken; a correctly used one-time pad cannot be. The <strong>One-time pad</strong> tab on the Morse screen does the same thing.</p>
+          <ul>
+            <li><strong>Pads</strong>: 500 to 5,000 groups of 5 random letters on numbered pages of 50 groups, made with your device's secure random generator (without bias). Pads are kept in your encrypted vault. You can link a pad to a contact.</li>
+            <li><strong>Who sends with what</strong>: by default you send with the first half of the pad and the other person with the second half, so you never both use the same letters. A "one-way" pad lets only the maker send.</li>
+            <li><strong>Sharing a pad</strong>: show it as a series of QR codes for the other phone to scan, or print it as a paper pad. Share pads only face to face or over a channel you fully trust, never in the clear over the internet. You can also send a pad in a Vexunori chat, with a warning: the pad is then only as safe as that chat.</li>
+            <li><strong>Enciphering</strong>: your text is turned into the letters A–Z (digits are spelled out, a full stop becomes X, spaces and other signs are left out). Each letter is added to the next pad letter mod 26 and the result is shown in 5-letter groups. The first group is a five-digit <strong>indicator</strong>, sent in the clear, that says where in the pad the message starts (for example <code>00051</code> = page 2, group 1). The used position is saved before the cipher is shown, and Vexunori refuses to encipher when your part of the pad is used up.</li>
+            <li><strong>Sending</strong>: copy the groups, key them out as sound, light or vibration (Farnsworth spacing helps with groups), or insert them into a chat (in the chat composer: Insert Morse → "Encipher with one-time pad").</li>
+            <li><strong>Deciphering</strong>: paste or tap in the groups (letters or Morse), pick the pad and press Decipher. You are warned loudly if those pad letters were already used to send a message from your device, which would mean a pad was used twice.</li>
+            <li><strong>Destroying</strong>: "Destroy used pages" overwrites the used groups on your device, so old messages can no longer be deciphered there. "Delete pad" removes the pad. Paper copies and the other person's copy are not affected; destroy those yourself. Phones and computers may keep traces of overwritten data in storage for some time.</li>
+          </ul>
+          <p>Limits: printing may not work inside the Android app, and pad transfer by QR code has not yet been tried on a real phone. Your security also depends on the other person keeping their copy safe. The <strong>Learn</strong> tab has a short history of one-time pads and Enigma.</p>
           <nav class="cta-row" aria-label="Guide navigation">
             <a class="btn" href="/vexunori/docs/files-and-sendguard.html">← Files & SendGuard</a>
             <a class="btn" href="/vexunori/docs/vault-and-spaces.html">Vault & Spaces →</a>
