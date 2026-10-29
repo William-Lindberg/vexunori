@@ -1,25 +1,15 @@
 {
-  "version": "0.2.0",
-  "versionCode": 200,
-  "buildDate": "2026-10-29T14:23:29.367Z",
-  "file": "vexunori-0.2.0.apk",
+  "version": "0.2.1",
+  "versionCode": 201,
+  "buildDate": "2026-10-29T14:47:25.567Z",
+  "file": "vexunori-0.2.1.apk",
   "size": 3907424,
-  "sha256": "716f8a00e52c08e5a1918fa49f3a7673f4da2bcfce49cae45222ed6bd6e53581",
+  "sha256": "788945acde1ce681b140b3c0b420a1d785a0ba9443fa8b27e24c0b8f3fa22a13",
   "minAndroid": "7.0",
   "signingCertSha256": "b96be6c7d263d56bd40b8479d02f94db6f848dae99f5ae6523b19b4b1087433b",
   "notes": [
-    "The Android app is still build-verified only: it has not yet been installed or run on a phone or emulator. New Android-only features (icon disguise, Quick lock tile, shake to freeze, PIN + Keystore) are marked experimental for that reason.",
-    "Group invite links and QR codes: admins can set an expiry and a maximum number of uses, and revoke links. Joining is approved automatically the next time an admin's app is online.",
-    "Send later and message reminders. Scheduled messages go out at the chosen time only while Vexunori is running; otherwise as soon as you open it.",
-    "View-once photos (experimental): deleted after one viewing; screenshots blocked on Android, not possible to block in a browser.",
-    "Collaborative notes in group workspaces: edit together with simple formatting (headings, bold, italic, lists and checklists); changes merge automatically.",
-    "Hidden profile: a second PIN or passphrase opens a separate profile with its own identity and chats. Someone examining the device's storage can still see that a second encrypted database exists.",
-    "PIN option (6+ digits) and PIN + Android Keystore; shake to freeze and a \"Quick lock\" Quick Settings tile.",
-    "App disguise (experimental, Android): choose a Calculator, Notes, Weather, Clock, Calendar or Flashlight icon with a working decoy screen; enter your code to open Vexunori. Not a security feature on its own.",
-    "Chat themes (accent colours, backgrounds, bubble style, text size, per-chat colour) and stickers (three built-in packs and your own stickers from photos or GIFs; no GIF search, no tracking).",
-    "One-time-pad Morse: WW2-style 5-letter groups enciphered with a random pad shared in person; pads are never reused.",
-    "Link another device with full history (experimental): scan a QR, compare 6 words, and your chats, contacts and Vault are copied across encrypted.",
-    "Fixes: damaged offline parcels are now always detected (gzip checksum check).",
-    "Android builds now run on GitHub Actions; releases are signed locally, so the signing key never leaves the maintainer's computer."
+    "Disguise: on the Notes, Weather, Clock, Calendar and Flashlight screens you can now tap the title 5 times quickly to open the code box. Press-and-hold still works, but on phones it was easily cancelled by the slightest finger movement.",
+    "Disguise: if you forget the code, your app PIN now works as well as your passphrase.",
+    "Disguise settings and the privacy guide now explain how to open the real app."
   ]
 }
