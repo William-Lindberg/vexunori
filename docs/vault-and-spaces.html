@@ -10,7 +10,7 @@
     <title>Vault & Spaces · Vexunori</title>
     <link rel="icon" href="/vexunori/favicon.svg" type="image/svg+xml" />
     <script type="module" crossorigin src="/vexunori/assets/app-4_tHw1xm.js"></script>
-    <script type="module" crossorigin src="/vexunori/assets/site-Bl5Pi7cw.js"></script>
+    <script type="module" crossorigin src="/vexunori/assets/site-BD7Tw1YB.js"></script>
     <link rel="stylesheet" crossorigin href="/vexunori/assets/app-D4G53B2d.css">
     <link rel="stylesheet" crossorigin href="/vexunori/assets/site-CIUq-uRg.css">
   </head>
@@ -72,7 +72,17 @@
             <li>Notes are shown as plain text; links open only through the <a href="/vexunori/docs/files-and-sendguard.html#links">link inspector</a>.</li>
           </ul>
           <h3 id="export">Exporting</h3>
-          <p>You can export single items or a bundle. Vexunori asks first and records a privacy receipt. <strong>An exported file is plaintext</strong> outside Vexunori: it is no longer protected by the app. Full backups are different — they are encrypted (see <a href="/vexunori/docs/backup-recovery.html">Backup</a>).</p>
+          <p>You can export single items or a bundle. Vexunori asks first and records a privacy receipt. <strong>A single exported item is a plaintext file</strong> outside Vexunori: it is no longer protected by the app. Full backups are different — they are encrypted (see <a href="/vexunori/docs/backup-recovery.html">Backup</a>).</p>
+          <h3 id="bundles">Encrypted bundles (.vxvault)</h3>
+          <p>A bundle holds several items in one file, encrypted with a passphrase you choose for that export only.</p>
+          <ul>
+            <li>The passphrase needs at least 10 characters and must be rated at least “Good” by the strength meter. There is no way to recover a forgotten export passphrase.</li>
+            <li>The file is encrypted with AES-256-GCM. The key comes from the passphrase through Argon2id (64 MiB of memory, 3 passes), which makes guessing slow and expensive. A phone that cannot spare 64 MiB uses 32 MiB, and the file records which settings were used.</li>
+            <li>Those settings are checked when the file is opened: if anyone changes them, the file will not open.</li>
+            <li>Exporting and importing take a few seconds while the key is worked out. The screen stays responsive.</li>
+            <li>Bundles made by older versions (PBKDF2-SHA256) still import. New bundles cannot be opened by those older versions.</li>
+            <li>Anyone with the file and the passphrase can read everything in it.</li>
+          </ul>
 
           <h2 id="spaces">Spaces</h2>
           <p>Spaces (Personal, Research, Sensitive, and your own) organise Vault items and conversations. Each Space can have its own colour and retention period.</p>
@@ -85,6 +95,9 @@
             </tbody>
           </table></div>
           <p>A protected Space is a real cryptographic boundary for its Vault items. Everything else about Spaces is an <strong>organisational boundary</strong>: it keeps things tidy but does not keep them apart from someone who has unlocked the app. Spaces are not isolated processes or separate storage.</p>
+          <h3 id="space-keys">How a Space passphrase protects the key</h3>
+          <p>A protected Space has its own random key. Vexunori stores that key only locked (“wrapped”) with a key made from your Space passphrase through Argon2id (64 MiB of memory, 3 passes; 32 MiB on a phone that cannot spare more). Unlocking takes a moment while this runs, and the screen shows “Unlocking…”.</p>
+          <p>Spaces protected by older versions used PBKDF2-SHA256. They still unlock with the same passphrase. The first time you unlock one, Vexunori locks the same Space key again with Argon2id and saves it in one step. If that fails, the old version stays and keeps working, and Vexunori tries again at the next unlock. Your items are not re-encrypted, because the Space key itself does not change.</p>
           <p>If you forget a Space passphrase, the items in that Space cannot be recovered. Space passphrases are included (wrapped) in full backups, but the backup does not let you bypass them.</p>
           <nav class="cta-row" aria-label="Guide navigation">
             <a class="btn" href="/vexunori/docs/morse.html">← Morse</a>

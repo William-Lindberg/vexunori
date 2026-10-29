@@ -1,19 +1,17 @@
 {
-  "version": "1.2.0",
-  "versionCode": 10200,
-  "buildDate": "2026-10-29T17:57:08.529Z",
-  "file": "vexunori-1.2.0.apk",
-  "size": 14562834,
-  "sha256": "df8d29b5929837c16340461c690f30c9a5ab16dc72304d6bb2bb67c158636f7c",
+  "version": "1.3.0",
+  "versionCode": 10300,
+  "buildDate": "2026-10-29T18:26:23.425Z",
+  "file": "vexunori-1.3.0.apk",
+  "size": 14702868,
+  "sha256": "fdc2989e9be8835b49910a96b398dab4a93d734dc9e6f89b9a4015686b6f060e",
   "minAndroid": "7.0",
   "signingCertSha256": "b96be6c7d263d56bd40b8479d02f94db6f848dae99f5ae6523b19b4b1087433b",
   "notes": [
-    "Secret Morse is now hidden behind \"Tap to reveal\" by default: revealing asks for your PIN or passphrase again, and the text hides itself after 30 seconds, when you leave the chat or switch apps. Turning this off also needs your PIN or passphrase.",
-    "Optional secret phrase per contact: agree on a phrase in person; it is never sent or saved, and without it nobody can decode your Secret Morse — not even someone holding your unlocked phone.",
-    "Optional burn after reading for Secret Morse: readable once, then deleted from both phones.",
-    "Your passphrase and PIN are now protected with Argon2id (memory-hard; much harder to guess with graphics cards). Existing profiles upgrade automatically the next time you unlock. New backups use Argon2id too; older backups still restore. Vault export bundles and protected Spaces still use PBKDF2 for now.",
-    "A much better strength meter (zxcvbn) when choosing a passphrase, PIN or backup passphrase.",
-    "24-word recovery phrase: show your identity as 24 words to write on paper (Settings → Security), and restore from it on a new device. This encodes your Vexunori key directly; it is not the NIP-06 seed format of some other Nostr apps.",
+    "Fingerprint / face unlock (Android, experimental, optional): unlock the app and reveal Secret Morse with your fingerprint. Android's secure hardware checks it and only then releases a key locked to it; Vexunori never sees your fingerprint. Your PIN or passphrase always works too. It never opens a hidden profile, and adding a new fingerprint to the phone switches it off until you turn it on again with your PIN. Turning Secret Morse protection off still needs your PIN or passphrase.",
+    "Vault export files (.vxvault) and protected Spaces now use Argon2id too. Old export files still import, and existing protected Spaces upgrade the first time you unlock them. Export files made with 1.3.0 cannot be opened by older versions.",
+    "Export passphrases must now be strong (strength meter).",
+    "New Android permissions from the fingerprint library: USE_BIOMETRIC and USE_FINGERPRINT (normal, no prompt).",
     "Still experimental and untested on many real phones — please report bugs on GitHub."
   ]
 }

@@ -10,7 +10,7 @@
     <title>Your identity · Vexunori</title>
     <link rel="icon" href="/vexunori/favicon.svg" type="image/svg+xml" />
     <script type="module" crossorigin src="/vexunori/assets/app-4_tHw1xm.js"></script>
-    <script type="module" crossorigin src="/vexunori/assets/site-Bl5Pi7cw.js"></script>
+    <script type="module" crossorigin src="/vexunori/assets/site-BD7Tw1YB.js"></script>
     <link rel="stylesheet" crossorigin href="/vexunori/assets/app-D4G53B2d.css">
     <link rel="stylesheet" crossorigin href="/vexunori/assets/site-CIUq-uRg.css">
   </head>
@@ -97,6 +97,16 @@
           <h3 id="strength">Strength meter</h3>
           <p>When you choose a passphrase, PIN, backup passphrase or export password, a meter rates it from 0 to 4 using <strong>zxcvbn</strong>, which knows common passwords, words, names, dates and keyboard patterns. Passphrases must reach at least 3 ("Good"). For PINs the usual PIN rules apply and the meter warns about patterns such as dates. The meter also shows a <em>rough</em> time to guess for someone who copied the app data, assuming about 10 000 guesses per second against our Argon2id setting — an estimate, not a promise. The word lists load only when you start typing, and what you type is never stored, logged or sent.</p>
           <p><strong>Auto-lock</strong> (default 15 minutes) locks the app when it is in the background or idle. <strong>Emergency Freeze</strong> in the Privacy Center locks immediately, drops keys from memory and closes connections; you need your passphrase (or an explicit "Unfreeze") to continue. It does not delete anything and cannot reach other devices.</p>
+
+          <h2 id="fingerprint">Fingerprint or face unlock (Android) <span class="pill pill--warn">Experimental</span></h2>
+          <p>In the Android app you can unlock Vexunori with your fingerprint or face instead of typing your PIN or passphrase. Turn it on in <strong>Settings → Security → Unlock with fingerprint</strong>; you enter your PIN or passphrase once and Android asks for your fingerprint once. The lock screen then shows <strong>Use fingerprint</strong>. It is not available on the web.</p>
+          <ul>
+            <li>Your fingerprint never leaves the phone and Vexunori never sees it; Android’s secure hardware checks it and only then lets Vexunori use a key that is locked to it. That key unlocks a second copy of your data key. Your PIN or passphrase keeps working; you can always use it instead.</li>
+            <li>Anyone whose fingerprint is set up on the phone can use it, so only turn this on if only your fingerprints are set up.</li>
+            <li>If a new fingerprint is added to the phone, Android destroys the key. Vexunori then asks for your PIN or passphrase and you turn fingerprint unlock on again.</li>
+            <li>The fingerprint opens only your normal profile. A hidden profile always needs its own PIN or passphrase.</li>
+            <li>Turning it off deletes the extra copy and the key.</li>
+          </ul>
 
           <h2 id="hidden">Hidden profile</h2>
           <p>A hidden profile is a second, separate profile on the same device with its own passphrase or PIN. Create it in <strong>Settings → Security → Hidden profile</strong>. Your normal profile needs a passphrase or PIN first, and the hidden one must use a different secret of the same kind, so the lock screen looks the same.</p>
