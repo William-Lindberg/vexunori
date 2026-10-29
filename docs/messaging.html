@@ -10,7 +10,7 @@
     <title>Messaging · Vexunori</title>
     <link rel="icon" href="/vexunori/favicon.svg" type="image/svg+xml" />
     <script type="module" crossorigin src="/vexunori/assets/app-4_tHw1xm.js"></script>
-    <script type="module" crossorigin src="/vexunori/assets/site-f9JA0ojA.js"></script>
+    <script type="module" crossorigin src="/vexunori/assets/site-BbUp1yna.js"></script>
     <link rel="stylesheet" crossorigin href="/vexunori/assets/app-D4G53B2d.css">
     <link rel="stylesheet" crossorigin href="/vexunori/assets/site-CIUq-uRg.css">
   </head>
@@ -143,7 +143,13 @@
           </ul>
 
           <h2 id="relays">Relays and delivery</h2>
-          <p>Your messages go to the recipient's inbox relays (from their invite) and a copy to your own relays so your other devices see them. Vexunori does not look up published relay lists (NIP-17 kind 10050): for a contact added by npub only, it sends to your own relays, which they may not read. By default Vexunori uses four public community relays. They are run by volunteers, are free, have no service guarantee and may change their rules. You can change relays in <strong>Settings → Relays</strong> or <a href="/vexunori/docs/self-hosting.html">run your own</a>.</p>
+          <p>Your messages go to the recipient's inbox relays (from their invite) and a copy to your own relays so your other devices see them. For a contact added by npub only, Vexunori looks up the inbox relay list they may have published (NIP-17 kind 10050) and sends there; if they have none, it sends to your own relays, which they may not read. By default Vexunori uses four public community relays. They are run by volunteers, are free, have no service guarantee and may change their rules. You can change relays in <strong>Settings → Relays</strong> or <a href="/vexunori/docs/self-hosting.html">run your own</a>.</p>
+          <h3 id="inbox-relays">Inbox relay lists (NIP-17 kind 10050)</h3>
+          <ul>
+            <li><strong>Your list.</strong> Vexunori publishes the relays where you receive messages, so people who only know your public key can find where to send them. It goes to your relays and to the public directory relay purplepag.es. It is public: anyone can see which relays you use (not your messages). Relays on your local network are left out. Turn it off in <strong>Settings → Relays → Publish my inbox relays</strong>; Vexunori then publishes an empty list in its place, but relays may keep old copies.</li>
+            <li><strong>Their list.</strong> When a contact has no relays (added by npub or hex key only), Vexunori asks your relays and purplepag.es for their list, checks its signature, uses the newest one and remembers it for 24 hours (stored encrypted). The chat shows "Looking up where to reach this contact…" while it asks. Asking tells those relays which key you are interested in. The lookup follows your Tor setting like every other connection.</li>
+            <li>If no list is found, messages go to your own relays and may not reach them. An invite link or QR code is still the most reliable way to add someone.</li>
+          </ul>
           <p>If the recipient's relays are down, messages wait there or in your queue. If a relay deletes old events before the recipient comes online, that message is lost; the sender sees "Sent to relays" but never "Delivered".</p>
           <nav class="cta-row" aria-label="Guide navigation">
             <a class="btn" href="/vexunori/docs/identity.html">← Your identity</a>

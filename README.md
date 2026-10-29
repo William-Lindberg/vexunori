@@ -24,7 +24,7 @@ Chat with friends, family or a team, keep your own notes and files locked away, 
 - **Check before you share.** SendGuard shows hidden information in a file (like the GPS location in a photo) and can remove it. Links are checked before they open.
 - **Browse privately (Android).** A built-in Private Browser that goes through Tor, with protection against tracking by device fingerprint.
 - **Hide it if you need to.** A hidden second profile behind its own PIN, a disguised app icon (for example a calculator), shake-to-lock and an Emergency Freeze button.
-- **Use Morse code.** Translate, tap out and play Morse as sound, light or vibration — including WW2-style one-time-pad encryption for Morse sent out loud.
+- **Use Morse code.** Translate, tap out and play Morse as sound, light or vibration — including **Secret Morse** (a new code for every message that only you and your contact can decode) and WW2-style one-time-pad encryption.
 - **Stay in touch without internet.** Hand over messages by QR code or as a file, or through a relay on your local Wi-Fi.
 
 No ads and no trackers.
@@ -76,7 +76,9 @@ Full details: [security page](https://william-lindberg.github.io/vexunori/securi
 | Local Wi-Fi communication | 🧪 local relay | ❌ | ❌ | ✅ |
 | Move to a new device with history | 🧪 | ✅ | ✅ | ❌ |
 | Morse code tools (text, sound, light, vibration) | ✅ | ❌ | ❌ | ❌ |
+| Secret Morse (new code every message, only you two can decode) | ✅ 1:1 chats | ❌ | ❌ | ❌ |
 | One-time-pad Morse encryption | ✅ | ❌ | ❌ | ❌ |
+| VPN check in the app | 🧪 Android | ❌ | ❌ | ❌ |
 | Encrypted Vault | ✅ | ❌ | ◐ | ◐ |
 | File metadata check before sharing | ✅ | ◐ photos | ❌ | ❌ |
 | Link check before opening | ✅ | ❌ | ❌ | ❌ |
@@ -95,12 +97,12 @@ Other apps change over time. This table reflects our understanding in October 20
 
 ## Good to know before you start
 
-- **Version 1.0.1, experimental.** Built and tested with automated tests and in browsers, but the Android app has not yet been tested on many real phones. Features marked 🧪 are the least proven.
+- **Version 1.1.0, experimental.** Built and tested with automated tests and in browsers, but the Android app has not yet been tested on many real phones. Features marked 🧪 are the least proven.
 - **Notifications** only arrive while Vexunori is running. There is no push service.
 - **The Private Browser is not Tor Browser.** It blocks many fingerprinting tricks, but the browser engine, fonts and TLS fingerprint can still identify it. For the strongest protection use the official Tor Browser.
 - **Some relays refuse Tor connections.** If a relay shows an error while Tor is on, your messages still go through the relays that work.
 - **Calls are off by default** because they show your IP address to the other person.
-- **Add people with an invite link.** Contacts added by key only may not receive your messages.
+- **Invite links are still best.** Contacts added by key only are now reached through their published relay list, but the first message can take a little longer.
 - **Back up.** If you lose your phone and your passphrase without a backup, your identity and messages cannot be recovered.
 
 ## Report a problem

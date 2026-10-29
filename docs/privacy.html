@@ -10,7 +10,7 @@
     <title>Privacy & data handling · Vexunori</title>
     <link rel="icon" href="/vexunori/favicon.svg" type="image/svg+xml" />
     <script type="module" crossorigin src="/vexunori/assets/app-4_tHw1xm.js"></script>
-    <script type="module" crossorigin src="/vexunori/assets/site-f9JA0ojA.js"></script>
+    <script type="module" crossorigin src="/vexunori/assets/site-BbUp1yna.js"></script>
     <link rel="stylesheet" crossorigin href="/vexunori/assets/app-D4G53B2d.css">
     <link rel="stylesheet" crossorigin href="/vexunori/assets/site-CIUq-uRg.css">
   </head>
@@ -80,7 +80,7 @@
             <li><strong>when</strong> envelopes arrive and are fetched, and their <strong>sizes</strong> (the time written inside is randomised up to two days back, the arrival time is not);</li>
             <li>your public key when your own relay asks you to authenticate (NIP-42) before handing over your inbox, which links it to your IP address. Vexunori only authenticates to your own relays, never to a recipient's.</li>
           </ul>
-          <p>Vexunori does not publish a public profile or relay list; your invite link carries that information instead. The operator cannot see the content or the sender of an envelope. However, when you send a message Vexunori also sends a copy to yourself; if you and your recipient use the same relay, the operator can see two envelopes arrive together from your IP address and infer who wrote to whom. Relays decide how long they keep data.</p>
+          <p>Vexunori does not publish a public profile. It does publish your <strong>inbox relay list</strong> (NIP-17 kind 10050) to your relays and to purplepag.es, so people who only know your public key can reach you: anyone can see which relays you use, not your messages. You can turn this off in Settings → Relays; an empty list then replaces it, but relays may keep old copies. When you message someone added by key only, Vexunori asks your relays and purplepag.es for their list, which tells those relays which key you are interested in. The operator cannot see the content or the sender of an envelope. However, when you send a message Vexunori also sends a copy to yourself; if you and your recipient use the same relay, the operator can see two envelopes arrive together from your IP address and infer who wrote to whom. Relays decide how long they keep data.</p>
 
           <h2 id="others">Seen by others</h2>
           <ul>
@@ -108,9 +108,20 @@
             <li><strong>Web app:</strong> a web page cannot change its icon or name, so this is called <strong>Disguise mode</strong>: only the decoy screen changes. The browser still shows the address, history and the installed app's name.</li>
             <li>The app opens on a <strong>working decoy</strong>: a real calculator, simple notes, a clock, a month calendar, a screen light, or a weather screen that shows “No data” (it has no data source). To reach the real lock screen, type your secret code on the calculator and press “=”; on the other screens tap the title 5 times quickly (or press and hold it), then enter the code. The decoy comes back whenever Vexunori locks or restarts.</li>
             <li><strong>This is not a security feature.</strong> The 4–12 digit code is stored hashed (SHA-256 with a random salt) but unencrypted on the device, because it must work before unlock. Someone who copies the app's storage can guess a short code quickly. Your messages stay protected by the lock screen and encryption. Notes typed into the Notes decoy are stored unencrypted.</li>
-            <li>Forgot the code? Tap the title 5 times and enter your app passphrase or PIN instead. Without a passphrase or PIN (Keystore-only or device mode) the only way back is clearing the app's data, which deletes everything on the device.</li>
+            <li>Forgot the code? Tap the title 5 times and enter your app passphrase or PIN instead. Without a passphrase or PIN (Keystore-only or device mode), enter your <strong>secret key</strong> instead: the <code>nsec1…</code> or the 64-character hex key. Vexunori checks it against your identity's public key and does not store it. That is why, in these modes, you must confirm that you have your secret key saved (Settings → Security → Show nsec) before the disguise is saved. Without the code and without your secret key, the only way back is clearing the app's data, which deletes everything on the device.</li>
             <li>Turn off notification previews too (Settings → Notifications), or a message notification may give the app away.</li>
           </ul>
+
+          <h2 id="vpn">VPN</h2>
+          <p>A VPN hides your IP address from websites and relays, but the VPN company can see your connection. Tor does not require trusting one company. You can use both.</p>
+          <ul>
+            <li><strong>Android:</strong> the Privacy Center (Health check) shows <strong>VPN detected</strong> or <strong>No VPN detected</strong>. The app asks Android only whether its network is a VPN — not which VPN, server or address — and sends nothing anywhere.</li>
+            <li><strong>Web:</strong> a web page cannot see whether your device uses a VPN, so it shows <strong>Can’t be checked on the web</strong>.</li>
+            <li>Vexunori does not include a VPN and makes no network requests for this check.</li>
+          </ul>
+          <h3 id="proton">A free option: Proton VPN</h3>
+          <p>Proton VPN Free costs nothing, has no data limit, and its no-logs policy has passed independent audits. Get the official app from the Play Store or from <code>protonvpn.com</code>, install it and tap Connect. Vexunori's traffic then goes through it automatically. Vexunori is not connected to Proton in any way.</p>
+          <p>Android allows only one VPN at a time, so Orbot in VPN mode cannot run alongside Proton. Vexunori's built-in Tor is not a VPN, so it works together with one: your traffic then goes phone → VPN → Tor → relay.</p>
 
           <h2 id="deletion">Deleting data</h2>
           <ul>

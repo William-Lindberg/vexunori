@@ -10,7 +10,7 @@
     <title>Contacts & verification · Vexunori</title>
     <link rel="icon" href="/vexunori/favicon.svg" type="image/svg+xml" />
     <script type="module" crossorigin src="/vexunori/assets/app-4_tHw1xm.js"></script>
-    <script type="module" crossorigin src="/vexunori/assets/site-f9JA0ojA.js"></script>
+    <script type="module" crossorigin src="/vexunori/assets/site-BbUp1yna.js"></script>
     <link rel="stylesheet" crossorigin href="/vexunori/assets/app-D4G53B2d.css">
     <link rel="stylesheet" crossorigin href="/vexunori/assets/site-CIUq-uRg.css">
   </head>
@@ -69,7 +69,7 @@
           <ul>
             <li>an <strong>invite link</strong> (it opens Vexunori and contains their public key, display name and inbox relays);</li>
             <li>their <strong>QR code</strong>, scanned with your camera;</li>
-            <li>their <strong>npub</strong> or nprofile, pasted. An npub alone has no relay information. Vexunori does not look up the relay list people may publish (NIP-17 kind 10050), so it sends to your own relays, and <strong>the other person may never receive your messages</strong> unless they also read from one of them. Prefer an invite link or QR code.</li>
+            <li>their <strong>npub</strong> or nprofile, pasted. An npub alone has no relay information, so Vexunori looks up the inbox relay list they may have published (NIP-17 kind 10050) on your relays and on purplepag.es; asking tells those relays which key you are interested in. If they never published one, Vexunori sends to your own relays and <strong>the other person may never receive your messages</strong> unless they also read from one of them; the chat tells you when this is the case. Prefer an invite link or QR code. See <a href="/vexunori/docs/messaging.html#inbox-relays">Inbox relay lists</a>.</li>
           </ul>
           <p>Invites contain nothing secret, but anyone who sees an invite can write to you. Share it the way you would share a phone number.</p>
 

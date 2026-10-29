@@ -10,7 +10,7 @@
     <title>Morse · Vexunori</title>
     <link rel="icon" href="/vexunori/favicon.svg" type="image/svg+xml" />
     <script type="module" crossorigin src="/vexunori/assets/app-4_tHw1xm.js"></script>
-    <script type="module" crossorigin src="/vexunori/assets/site-f9JA0ojA.js"></script>
+    <script type="module" crossorigin src="/vexunori/assets/site-BbUp1yna.js"></script>
     <link rel="stylesheet" crossorigin href="/vexunori/assets/app-D4G53B2d.css">
     <link rel="stylesheet" crossorigin href="/vexunori/assets/site-CIUq-uRg.css">
   </head>
@@ -90,7 +90,22 @@
           <p>Decodes Morse tones through your microphone. The microphone opens only when you press Start, after your browser or Android asks for permission, and audio never leaves the device. It works only with a single clean, steady tone between 300 and 1200 Hz, in a quiet room; speech, music, noise or two tones close together confuse it. It has not yet been tried with a real microphone on a phone.</p>
 
           <h2 id="chat">Morse in chats</h2>
-          <p>Insert Morse into a message from the chat composer or send from the Morse screen. Messages composed in Morse are marked with a Morse badge for the recipient.</p>
+          <p>Insert Morse into a message from the chat composer or send from the Morse screen. Messages composed in Morse are marked with a Morse badge for the recipient. To make Morse that only your contact can read, use <a href="#secret-morse">Secret Morse</a>.</p>
+
+          <h2 id="secret-morse">Secret Morse (automatic, with a contact)</h2>
+          <div class="banner"><p><strong>Secret Morse turns your message into a code made from your and your contact's private keys.</strong> A new code is created for every message. Only your two phones can decode it — not relays, not Vexunori's makers, nobody else. People who hear or see the Morse only get the code. Someone who unlocks your phone can read it, so keep the app locked. It is modern encryption (very strong), not a one-time pad.</p></div>
+          <p>There are no pads to share: the code comes from the keys you already have for each other, so it works as soon as you are contacts.</p>
+          <ul>
+            <li><strong>In a one-to-one chat</strong>: tap the lock button next to the Morse button. While it is on, what you type is sent as a code, and drafts are not saved. Your contact's app decodes it automatically and shows the text with “🔒 Secret Morse · decoded on this phone”. “Show code” shows the groups and their Morse, and Play opens them in the Morse player. The decoded text is only kept on screen; the saved message keeps the code. In group chats the button is hidden: Secret Morse works in one-to-one chats only.</li>
+            <li><strong>By sound, light or radio</strong>: on the Morse screen, open <strong>Secret Morse</strong>, pick the contact, type the message and press Make code. Copy the groups or the Morse, or play them as sound, light or vibration. The other person picks you as the contact, pastes or taps in the groups (letters or Morse; spacing doesn't matter) and presses Decode.</li>
+            <li><strong>What is kept</strong>: letters (accents removed), digits, spaces and <code>. , ? ! ' - /</code>. Other signs are left out and you are told which. Morse has no capitals, so messages arrive in capitals. Up to about 5,000 characters.</li>
+            <li><strong>If decoding fails</strong> you see “Couldn't decode — not from this contact or damaged.” That means the wrong contact was picked, a group was copied wrongly, or someone changed it.</li>
+          </ul>
+          <details>
+            <summary>How it works (technical)</summary>
+            <p>Both phones compute the same shared secret from your private key and the other person's public key (NIP-44 v2 conversation key: ECDH on secp256k1). Each message gets a fresh random 50-bit indicator, sent in the clear as the first two groups (letters and the digits 2–7). HKDF-SHA256 turns the shared secret and the indicator into two one-message keys. The text is mapped to the 36 symbols A–Z 0–9 (a space is <code>0</code>, a digit <var>d</var> is <code>1</code><var>d</var>, <code>. , ? ! ' - /</code> are <code>2</code>–<code>8</code>, and <code>9</code> fills the last group), and a ChaCha20 keystream, sampled without bias, is added mod 36. The last two groups are a check code (about 51 bits from HMAC-SHA256) that detects a wrong key or any change. Messages look like <code>[2 indicator groups] [message groups] [2 check groups]</code>; in a chat they start with <code>VXSM1</code>. All primitives come from the audited @noble libraries. The length of the message (in groups) is not hidden.</p>
+          </details>
+          <p>The manual one-time pad below is still available for when you want a key that does not depend on your phone's private key.</p>
 
           <h2 id="one-time-pad">One-time pad (WW2-style secret Morse)</h2>
           <div class="banner"><p><strong>A one-time pad is unbreakable only if the pad is truly random, used once, shared securely, and destroyed after use.</strong> Lose or reuse the pad and the protection is gone. In a chat, messages are also end-to-end encrypted; the pad mostly matters when you send Morse by sound, light or radio, where anyone can listen.</p></div>

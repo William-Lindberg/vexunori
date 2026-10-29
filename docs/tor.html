@@ -10,7 +10,7 @@
     <title>Tor · Vexunori</title>
     <link rel="icon" href="/vexunori/favicon.svg" type="image/svg+xml" />
     <script type="module" crossorigin src="/vexunori/assets/app-4_tHw1xm.js"></script>
-    <script type="module" crossorigin src="/vexunori/assets/site-f9JA0ojA.js"></script>
+    <script type="module" crossorigin src="/vexunori/assets/site-BbUp1yna.js"></script>
     <link rel="stylesheet" crossorigin href="/vexunori/assets/app-D4G53B2d.css">
     <link rel="stylesheet" crossorigin href="/vexunori/assets/site-CIUq-uRg.css">
   </head>
@@ -74,10 +74,20 @@
             <li>When Tor is ready, Vexunori tells Android System WebView to send all of the app's web traffic — relay connections and checks — through Tor, and then runs a <strong>Tor check</strong>.</li>
           </ol>
           <p>The status says <strong>Tor confirmed</strong> only after the check sees your traffic leaving from a Tor exit. Until then it says "Connecting to Tor… 45%", "Checking", "Not using Tor" or "Tor check failed" — never a decorative onion icon. If Tor fails, the app says so; it never quietly switches to a direct connection in strict mode.</p>
-          <p>With Tor mode on, Tor starts automatically every time you open the app. <strong>New identity</strong> asks Tor for new circuits, so relays see a different Tor exit. This needs an Android System WebView that supports proxy override; the Tor settings tell you if yours does not. The built-in Tor makes the APK about 20–30 MB larger. It does not support bridges yet.</p>
+          <p>With Tor mode on, Tor starts automatically every time you open the app. <strong>New identity</strong> asks Tor for new circuits, so relays see a different Tor exit. This needs an Android System WebView that supports proxy override; the Tor settings tell you if yours does not. The built-in Tor makes the APK about 20–30 MB larger. Built-in Tor does not support bridges yet (see <a href="#blocked">Tor blocked where you are?</a>).</p>
 
           <h3 id="orbot">Advanced: use Orbot instead</h3>
           <p>If you already run <strong>Orbot</strong>, choose <strong>Advanced: use Orbot instead</strong>. Vexunori then uses Orbot's HTTP proxy (default <code>127.0.0.1:8118</code>). You start and connect Orbot yourself. Orbot is also the way to use bridges where Tor is blocked.</p>
+
+          <h3 id="blocked">Tor blocked where you are?</h3>
+          <p><strong>Built-in Tor does not support bridges yet.</strong> Bridges are hidden entry points into Tor that help where Tor is blocked. They cannot be built into Vexunori: the bridge software includes code under the GNU GPL (version 3) licence, and Vexunori is closed source. Use them through Orbot:</p>
+          <ol>
+            <li>Install Orbot (from F-Droid or Google Play).</li>
+            <li>In Orbot, turn on bridges: choose <strong>Snowflake</strong> or <strong>obfs4</strong>. Tap Connect and wait until Orbot says it is connected.</li>
+            <li>In Vexunori, open <strong>Settings → Tor</strong> and under <strong>Which Tor</strong> choose <strong>Advanced: use Orbot instead</strong> (or tap <strong>Switch to Orbot</strong> under “Tor blocked where you are?”).</li>
+            <li>Press <strong>Check now</strong>. The status says “Tor confirmed” once it works.</li>
+          </ol>
+          <p>Using a VPN as well? Android allows one VPN at a time, so use Orbot's proxy mode (not its VPN mode) next to a VPN app. See <a href="/vexunori/docs/privacy.html#vpn">VPN</a>.</p>
 
           <h2 id="modes">Prefer vs strict</h2>
           <dl>
@@ -134,7 +144,7 @@
 
           <h2 id="trouble">Troubleshooting</h2>
           <ul>
-            <li>Stuck at "Connecting to Tor": check your internet connection and wait up to a minute. Switch Tor mode off and on to restart Tor. Where Tor is blocked, use Orbot with bridges.</li>
+            <li>Stuck at "Connecting to Tor": check your internet connection and wait up to a minute. Switch Tor mode off and on to restart Tor. Where Tor is blocked, use Orbot with bridges (see <a href="#blocked">Tor blocked where you are?</a>).</li>
             <li>"Tor check failed" right after connecting: the first circuits can be slow. Press "Check now" again.</li>
             <li>With Orbot: "Not using Tor" means Orbot is not running or connected, or its HTTP proxy port does not match the setting.</li>
             <li>Some relays block Tor exits. Add relays that accept Tor if messages stay queued.</li>

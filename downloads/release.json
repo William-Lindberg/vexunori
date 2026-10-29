@@ -1,14 +1,18 @@
 {
-  "version": "1.0.2",
-  "versionCode": 10002,
-  "buildDate": "2026-10-29T16:10:26.692Z",
-  "file": "vexunori-1.0.2.apk",
-  "size": 13660566,
-  "sha256": "f9e8b70569394391f3bcc153a9039213b82d2ccb6603e2ff3d06a3973b81f89e",
+  "version": "1.1.0",
+  "versionCode": 10100,
+  "buildDate": "2026-10-29T16:47:04.625Z",
+  "file": "vexunori-1.1.0.apk",
+  "size": 13673120,
+  "sha256": "be952e21068da3a6c3e544b4a39fca63b00f4e044ed534657fb0a49ab2e3d674",
   "minAndroid": "7.0",
   "signingCertSha256": "b96be6c7d263d56bd40b8479d02f94db6f848dae99f5ae6523b19b4b1087433b",
   "notes": [
-    "Vexunori is experimental: the app (Welcome screen, Settings → About), the website and the README now say so clearly and ask you to report bugs, with a \"Report a problem\" button.",
-    "The README explains in plain words how messages travel through relays and how they are secured, and the comparison table now lists the newer features."
+    "Secret Morse (one-to-one chats and the Morse screen): your message becomes a code made from your and your contact's private keys, with a new code for every message. Only your two phones can decode it; the recipient sees the decoded text automatically, and anyone who hears or sees the Morse only gets the code. Plain text is never stored. It is modern encryption, not a one-time pad (the one-time pad is still available).",
+    "Contacts added only by their key can now be reached: Vexunori publishes the relays where you receive messages (NIP-17 inbox relay list; can be turned off in Settings → Relays) and looks up your contacts' lists, also via the purplepag.es directory.",
+    "Privacy Center shows whether a VPN is on (Android), with a guide to using Proton VPN Free alongside Vexunori. New Android permission: ACCESS_NETWORK_STATE (connection type only, no prompt).",
+    "Settings → Tor explains what to do when Tor is blocked (Orbot with bridges). Built-in bridges are not included because the bridge library contains GPL code.",
+    "Disguise: without a passphrase or PIN you can now get back in with your secret key if you forget the code.",
+    "Still experimental and untested on many real phones — please report bugs on GitHub."
   ]
 }
